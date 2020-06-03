@@ -1,0 +1,306 @@
+@import "../../../sass/config.scss";
+
+.wrap {
+    width: 100%;
+    background: #fff;
+}
+
+.main {
+    @include globalWidth;
+    overflow: visible !important;
+
+    &__toph {
+        background: url('./background.png');
+        background-size: cover;
+        background-position: bottom;
+        background-repeat: no-repeat;
+        text-align: center;
+        border-radius: $border_radius;
+
+        h2 {
+            padding-top: 6.5rem; padding-bottom: 6.4rem;
+            color: #fff;
+        }
+    }
+
+    &__header {
+        margin-top: 7.4rem;
+
+        h2 {
+            font-size: 2.9rem;
+            font-weight: 600;
+            color: #333;
+            text-align: center;
+        }
+
+        h4 {
+            margin-bottom: 2.5rem;
+            font-size: 2.1rem;
+            font-weight: 800;
+            color: #222;
+        }
+    }
+}
+
+.person {
+
+    &__form {
+
+        input {
+            width: calc(33.33% - 1.2rem);
+            margin-left: 1.8rem;
+            padding: 1.7rem 2rem;
+            border-radius: $border_radius;
+            // border: 2px solid #f1f1f1;
+            background: #EDF0F3;
+            font-size: 1.5rem;
+            color: #222;
+            font-weight: 500;
+    
+            &:first-of-type {
+                margin-left: 0;
+            }
+        }
+    }
+}
+
+.categories {
+
+    &__grid {
+        display: grid;
+        grid-column-gap: 1.8rem;
+        grid-row-gap: 1.2rem;
+        grid-template-columns: calc(25% - 1.2rem) calc(25% - 1.2rem) calc(25% - 1.2rem) calc(25% - 1.2rem);
+        // grid-template-columns: calc(33.33% - 1.2rem) calc(33.33% - 1.2rem) calc(33.33% - 1.2rem);
+    }
+
+    &__item {
+        width: 100%;
+        border-radius: $border_radius;
+        overflow: hidden;
+        text-align: center;
+        cursor: pointer;
+        position: relative;
+        height: 14rem;
+        @include createTransition(.4s, cubic-bezier(.38,.41,.26,1));
+
+        &::after {
+            position: absolute;
+            content: "";
+            width: 100%; height: 100%;
+            bottom: 0; left: 0;
+            background: linear-gradient(180deg,transparent,rgba(0,0,0,.62));
+            z-index: 0;
+            opacity: .8;
+        }
+
+        &:hover {
+            img {
+                transform: scale(1.15);
+            }
+
+            transform: scale(1.03);
+        }
+
+        &--active {
+            &::after {
+                background: linear-gradient(180deg,transparent, var(--primary)) !important;
+            }
+
+            p {
+                font-size: 2.1rem !important;
+                transform: translateY(0) !important;
+            }
+
+            span {
+                transform: translateY(0) !important;
+                opacity: 1 !important;
+            }
+        }
+
+        img {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            -o-object-fit: cover;
+            object-fit: cover;
+            font-family: "object-fit: cover";
+            @include createTransition(.4s, cubic-bezier(.38,.41,.26,1));
+        }
+
+        &--name {
+            @include absoluteCenter;
+            padding: 0 1.7rem;
+            z-index: 1;
+        }   
+
+        p {
+            font-size: 1.9rem;
+            font-weight: 600;
+            color: #fff;
+            @include createTransition(.4s, cubic-bezier(.38,.41,.26,1));
+            transform: translateY(1.2rem);
+        }
+
+        span {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #fff;
+            opacity: 0;
+            @include createTransition(.6s, cubic-bezier(.38,.41,.26,1));
+            transform: translateY(.7rem);
+        }
+    }
+}
+
+.type {
+    margin-bottom: 4rem;
+
+    &__content {
+        @include clearfix;
+    }
+
+    &__item {
+        float: left;
+        width: calc(50% - .9rem);
+        margin-left: 1.8rem;
+        display: flex;
+        align-items: center;
+        background: #EDF0F3;
+        border-radius: $border_radius;
+        padding: 1rem 2.1rem;
+        box-sizing: border-box;
+        border: 2px solid transparent;
+        @include createTransition(.3s, ease);
+        cursor: pointer;
+
+        svg {
+            width: 4.5rem;
+            height: auto;
+
+            &:last-of-type {
+                width: 4rem;
+            }
+        }
+
+        p {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: #333;
+        }
+
+        &:first-of-type {
+            margin-left: 0;
+        }
+
+        // &--active {
+        //     border: 2px solid var(--primary);
+        //     background: #fff;
+
+        //     p {
+        //         color: var(--primary);
+        //     }
+
+        //     svg, g {
+        //         fill: var(--primary) !important;
+        //     }
+        // }
+        &--active {
+            border: 2px solid var(--primary);
+            background: var(--primary);
+
+            p {
+                // color: var(--primary);
+                color: #fff;
+            }
+
+            svg, g {
+                // fill: var(--primary) !important;
+                fill: #fff;
+            }
+        }
+    }
+}
+
+
+.content {
+    display: flex;
+
+    &__left {
+        width: calc(100% - 77rem);
+    }
+
+    &__box {
+        position: sticky;
+        top: 10.4rem;
+    }
+
+    &__right {
+        width: 67rem;
+        margin-left: 10rem;
+    }
+}
+
+.attachments {
+
+}
+
+.admin {
+    display: flex;
+    align-items: center;
+    margin-top: 2.7rem;
+
+    &__user {
+        display: flex;
+        align-items: center;
+        width: calc(100% - 15rem);
+    }
+
+    &__icon {
+        width: 5.1rem; height: 5.1rem;
+        border-radius: 100px;
+        @include createShadow(0 5px 10px 0 rgba(50,50,50,.15));
+        overflow: hidden;
+        position: relative;
+
+        span {
+            @include absoluteCenter;
+            font-weight: 700;
+            font-size: 1.9rem;
+            text-transform: uppercase;
+            color: #fff;
+        }
+    }
+
+    &__name {
+        padding-left: 2.7rem;
+        padding-top: .5rem;
+
+        p {
+            font-size: 1.5rem;
+            color: var(--gray-text);
+            font-weight: 600;
+            line-height: 80%;
+        }
+
+        span {
+            font-size: 1.2rem;
+            color: #99a0ab;
+            font-weight: 500;
+        }
+    }
+
+    &__panel {
+        width: 15rem;
+        text-align: center;
+
+        a {
+            display: block;
+            color: #fff;
+            font-weight: 600;
+            font-size: 1.3rem;
+            padding: 1.2rem 0;
+            border-radius: $border_radius;
+        }
+    }
+}

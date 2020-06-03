@@ -1,0 +1,99 @@
+@import '../../../../sass/config.scss';
+
+.wrapper {
+    padding-top: $main_top_padding;
+    @include globalWidth;
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    overflow: visible;
+}
+
+.info {
+    width: 24rem;
+    box-sizing: border-box;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 10rem;
+
+    &__back {
+        margin-bottom: 2.1rem;
+        background: var(--primary);
+        // background: lighten($color: $col_primary, $amount: 25%);
+        border-radius: $border_radius;
+        text-align: center;
+
+        a {
+            display: inline-block;
+            padding: 1.4rem 1rem;
+            font-size: 1.2rem;
+            font-weight: 500;
+            color: #fff;
+        }
+    }
+
+    &__current {
+        border-radius: $border_radius;
+        overflow: hidden;
+        position: relative;
+    }
+
+    &__current-name {
+        background: rgba($color: #000000, $alpha: .4);
+        padding: 4.7rem 1rem;
+        text-align: center;
+
+        p {
+            color: #fff;
+            font-size: 1.7rem;
+            font-weight: 600;
+        }
+    }
+
+    &__others {
+        margin-top: 3.1rem;
+        
+        h5 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--secondary-text);
+        }
+    }
+
+    &__othersitem {
+        border-radius: $border_radius;
+        overflow: hidden;
+        position: relative;
+        margin-top: 1.4rem;
+    }
+
+    &__othersitem-name {
+        background: rgba($color: #000000, $alpha: .4);
+        padding: 2.4rem 1rem;
+        text-align: center;
+
+        p {
+            color: #fff;
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+    }
+}
+
+.feed {
+    margin-left: 4rem;
+    width: calc(100% - 28rem);
+    box-sizing: border-box;
+
+    &__inner {
+        max-width: 47rem; height: 2000px;
+        margin-left: auto; margin-right: auto;
+    }
+
+    &__header {
+        h4 {
+            font-size: 1.8rem;
+            color: var(--primary-text);
+        }
+    }
+}

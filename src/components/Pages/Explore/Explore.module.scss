@@ -1,0 +1,34 @@
+@import '../../../sass/config.scss';
+
+.container {
+    @include globalWidth;
+    background: var(--surface-background);
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    overflow: visible;
+    position: relative;
+}
+
+.menu {
+    height: 100vh;
+    width: 29rem;   
+    z-index: 1;
+}
+
+.sidebar {
+    width: 29rem;
+    height: 100vh;
+    z-index: 1;
+}
+
+.feed {
+    width: calc(100% - 58rem);
+}
+
+.feed-wrapper {
+    width: 67rem;
+    height: 2000px;
+    margin-left: auto; margin-right: auto;
+    background: #D8E8FF;
+}

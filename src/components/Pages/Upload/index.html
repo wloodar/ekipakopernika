@@ -1,0 +1,58 @@
+<!-- <div className={s.main}>
+    <div className={s.person}>
+        <div className={s.main__header}>
+            <h3 className="bs-title">Twoje dane</h3>
+        </div>
+        <div className={s.person__form}>
+            <input
+                type="text"
+                name="first_name"
+                placeholder="Imię ..."
+                value={this.state.first_name}
+                onChange={this.handleInputChange}   
+                autoComplete="off" 
+                className="nbs-input"
+            />
+            <input
+                type="text"
+                name="last_name"
+                placeholder="Nazwisko ..."
+                value={this.state.last_name}
+                onChange={this.handleInputChange}    
+                autoComplete="off" 
+                className="nbs-input"
+            />
+            <input
+                type="text"
+                name="class"
+                placeholder="Klasa ..."
+                value={this.state.class}
+                onChange={this.handleInputChange}    
+                autoComplete="off" 
+                className="nbs-input"
+            />
+        </div>
+    </div>
+    <div className={s['choose-box']}>
+        <div className={s.main__header}>
+            <h3 className="bs-title">Typ</h3>
+        </div>
+        <div className={s['choose-box__items']}>
+            <div className={[s['choose-item'], pub_type == 1 ? s['choose-item--active']:null].join(' ')} onClick={() => this.choosePublicationType(1)}>
+                <Icon name="article"/>
+                <h5>Artykuł</h5>
+            </div>
+            <div className={[s['choose-item'], pub_type == 2 ? s['choose-item--active']:null].join(' ')} onClick={() => this.choosePublicationType(2)}>
+                <Icon name="image"/>
+                <h5>Krótki post</h5>
+            </div>
+        </div>
+    </div>
+    <div className={s.content}>
+        {/* <div className={s.main__header}>
+            <h3 className="bs-title">Utwórz</h3>
+        </div> */}
+        {pub_type === 1 ? <Article user_data={{pub_type: this.state.pub_type, first_name: this.state.first_name, last_name: this.state.last_name, class: this.state.class}}/> : null}
+        {pub_type === 2 ? <Post user_data={{pub_type: this.state.pub_type, first_name: this.state.first_name, last_name: this.state.last_name, class: this.state.class}}/> : null}
+    </div>
+</div> -->

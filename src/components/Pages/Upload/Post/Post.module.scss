@@ -1,0 +1,20 @@
+@import '../../../../sass/config.scss';
+
+.form {
+    &__textarea {
+        textarea {
+            display: block;
+            width: 100%;
+            padding: 1.9rem 2.4rem;
+            line-height: 160%;
+            border-radius: $border_radius;
+            border: 0;
+            background: lighten($color: #EDF0F3, $amount: 3%);
+            font-size: 1.5rem;
+            color: #222;
+            font-weight: 500;
+            resize: none;
+            outline: 0;
+        }
+    }
+}

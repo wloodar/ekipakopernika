@@ -1,0 +1,17 @@
+@import '../../../sass/config.scss';
+
+.wrap {
+    height: 200rem;
+    padding-top: $main_top_padding;
+
+    &__header {
+        margin-top: 3rem;
+        @include globalWidth;
+        text-align: center;
+
+        h2 {
+            font-size: 3.1rem;
+            font-weight: 800;
+        }
+    }
+}

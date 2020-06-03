@@ -1,0 +1,176 @@
+import React, { Component, createRef } from 'react';
+import { NavLink, Link, withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import s from './AppLayout.module.scss';
+import $ from 'jquery';
+import Icon from '../../Icons/base';
+import FooterBanner from './banner2.png';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+// import './main';
+import './style.css';
+ 
+class AppLayout extends Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            
+        };
+
+        this.changeUnderlinePosition = this.changeUnderlinePosition.bind();
+    }
+
+    componentDidMount() {
+        this.updateUnderlinePosition();
+    }
+
+    componentDidUpdate() {
+        this.updateUnderlinePosition();
+    }
+
+    updateUnderlinePosition() {
+        let menu = document.getElementById('mn_nav');
+        if (menu) {
+            let sliding_border = document.getElementById('nav_slide_click');
+            const lengthOfItems = $('#mn_nav').children('li').length;
+            
+            const widthOfElement = Math.round(100 / lengthOfItems);
+            
+            const marginLeft = Math.round(widthOfElement * $('.mn_nav_active').parent().index());
+            if ($('.mn_nav_active').parent().index() !== -1) {
+                // sliding_border.style.marginLeft = marginLeft + '%';  
+
+                // sliding_border.style.width =  widthOfElement + '%';
+                sliding_border.style.opacity = "1";
+                sliding_border.style.marginLeft =  $('.mn_nav_active').parent().position().left + "px";
+                sliding_border.style.width =  $('.mn_nav_active').parent().width() + "px";
+            } else {
+                sliding_border.style.opacity = "0";
+            }
+        }
+
+        function getPercentage( min, max ) {
+            return min / max * 100;
+        }
+    }
+
+    changeUnderlinePosition() {
+        let menu = document.getElementById('mn_nav');
+
+        if (menu) {
+            let menu_slider_click = document.getElementById('nav_slide_click');
+            if ( menu_slider_click ) {
+              nav_slider( menu, function( el, width, tempMarginLeft ) {   
+                    el.onclick = () => {
+                        menu_slider_click.style.width =  Math.round(width) + '%';                    
+                        menu_slider_click.style.marginLeft = Math.round(tempMarginLeft) + '%';    
+                    }
+              });
+            }
+        }
+
+        function nav_slider( menu, callback ) {
+            
+            let menu_width = menu.offsetWidth;
+            // We only want the <li> </li> tags
+            menu = menu.getElementsByTagName( 'li' );            
+            if ( menu.length > 0 ) {
+              var marginLeft = [];
+              // Loop through nav children i.e li
+              [].forEach.call( menu, ( el, index ) => {
+                // Dynamic width/margin calculation for hr       app-mnav--main--active       
+                var width = getPercentage( el.offsetWidth, menu_width );   
+                // var width = getPercentage( $('.app-mnav--main--active').outerWidth(), menu_width );                              
+                var tempMarginLeft = 0;
+                // We don't want to modify first elements positioning
+                if ( index != 0 )  {
+                  tempMarginLeft = getArraySum( marginLeft );
+                }            
+                // Set mouse event  hover/click
+                callback( el, width, tempMarginLeft );      
+                /* We store it in array because the later accumulated value is used for positioning */
+                marginLeft.push( width );
+              } );
+            }
+        }
+
+        function getPercentage( min, max ) {
+            return min / max * 100;
+        }
+          
+          // Not using reduce, because IE8 doesn't supprt it
+        function getArraySum( arr ) {
+            let sum = 0;
+            [].forEach.call( arr, ( el, index ) => {
+              sum += el;
+            } );
+            return sum;
+        }
+
+    }
+
+    animateTransition = (el) => {
+       
+    }
+
+    render() {
+
+        return (
+            <>
+            <nav className={s.nav}>
+                <div className={s['nav__inner']}>
+                    <h3><Link to="/">#EkipaKopernika</Link></h3>
+                    <div className={s['nav-list']}>
+                        <ul id="mn_nav">
+                            <li><NavLink exact to="/" activeClassName={[s['nav-list--active'], "mn_nav_active"].join(' ')}>Odkryj</NavLink></li>
+                            <li><NavLink to="/kategorie" activeClassName={[s['nav-list--active'], "mn_nav_active"].join(' ')}>Kategorie</NavLink></li>
+                            <li><NavLink to="/wydarzenia" activeClassName={[s['nav-list--active'], "mn_nav_active"].join(' ')}>Wydarzenia</NavLink></li>
+                            <li><NavLink to="/onas" activeClassName={[s['nav-list--active'], "mn_nav_active"].join(' ')}>O nas</NavLink></li>
+                            <hr id="nav_slide_click"/>
+                        </ul>
+                    </div>
+                    {/* <Link to="/dodaj">Podziel się</Link> */}
+                    <div className={s['nav-share']}>
+                        <Link to="/dodaj">
+                            <p>Podziel się</p>
+                            <Icon name="uploadcloud"/>
+                        </Link>
+                    </div>
+                </div>
+            </nav>
+            <div className={s.wrap}>
+                <ReactCSSTransitionGroup
+                    transitionName="example"
+                    transitionEnterTimeout={500}
+                    transitionLeaveTimeout={300}
+                    className="example"
+                >
+                    {React.cloneElement(this.props.children)}
+                    {/* {this.props.children} */}
+                </ReactCSSTransitionGroup>
+            </div>
+            <footer className={s.footer}>
+                <div className={s['footer__inner']}>
+                    <div className={s['footer__banner']}>
+                        <img src={FooterBanner}/>
+                    </div>
+                    <div className={s['footer__copyright']}>
+                        <p>© 2020 drużynakopernika</p>
+                    </div>
+                </div>
+            </footer>
+            </>
+        )
+    }
+}
+
+AppLayout.propTypes = {
+    auth: PropTypes.object,
+};
+
+const mapStateToProps = (state) => ({
+    auth: state.auth,
+});
+
+export default withRouter(connect(mapStateToProps)(AppLayout));
