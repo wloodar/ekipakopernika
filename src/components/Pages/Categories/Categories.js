@@ -44,11 +44,11 @@ class Categories extends Component {
                         </div>)}
                     </div>
 
-                    <div className={s.featured}>
+                    {/* <div className={s.featured}>
                         <div className={s.main__header}>
                             <h3 className="bs-header">Wyróżnione posty</h3>
                         </div>
-                    </div>
+                    </div> */}
 
                 </div>
                 

@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Manrope:300,400,500,600,700,800&display=swap');
+// @import url('https://fonts.googleapis.com/css?family=Manrope:300,400,500,600,700,800&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Tinos:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700;800&display=swap');
 
@@ -11,6 +11,8 @@
     -webkit-appearance: none !important;
     -moz-appearance: none;
     appearance: none;
+    // -webkit-font-smoothing: antialiased !important;
+    // -webkit-font-smoothing: none !important;
 }
 
 html {
@@ -36,6 +38,8 @@ body {
     // font-family: 'Poppins', sans-serif;
     // background: var(--bg-color);
     font-family: 'Manrope', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 a {
@@ -91,10 +95,12 @@ img {
 
     --primary-text: #2f2f2f;
     --secondary-text: #333;
+    --dark-gray-text: #5e676e;
     --gray-text: #777;
     --black-white-btn: #fafafa;
     --welcome-theme-border: #eeeeee;
     --surface-background: #fff;
+    --newsurface-background: #EDF0F3;
     --convs-viewed-background: #fff;
     --convs-top-bar-background: rgba(255,255,255,.94);
     --convs-message-bubble: #e4e7eb;
@@ -123,10 +129,12 @@ img {
 
     --primary-text: #eeeeee;
     --secondary-text: #b0b3b7;
+    --dark-gray-text: #5e676e;
     --gray-text: #777;
     --black-white-btn: #222222;
     --welcome-theme-border: rgba(255,255,255,0);
     --surface-background: #242524;
+    --newsurface-background: #EDF0F3;
     --convs-viewed-background: #242524;
     --convs-top-bar-background: rgba(36,37,36,.97);
     --convs-message-bubble: #242524;

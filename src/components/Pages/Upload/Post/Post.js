@@ -13,9 +13,15 @@ class Post extends Component {
         this.handleInputChange = this.handleInputChange.bind(this);
     }
 
+    sendData = (val) => {
+        this.props.parentCallback(val);
+    }
+
     handleInputChange(e) {
         const current_target = [e.target.name].toString();
         this.setState({ [e.target.name]: e.target.value });
+
+        this.sendData(e.target.value);
 
         e.target.style.cssText = 'height:auto;';
         e.target.style.cssText = 'height:' + e.target.scrollHeight + 'px';

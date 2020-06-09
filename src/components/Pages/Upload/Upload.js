@@ -4,11 +4,15 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import cs from 'classnames';
 import axios from 'axios';
+import $ from 'jquery';
 import { createUrl } from '../../../functions/ImageUrl';
 import s from './Upload.module.scss';
 import Icon from '../../Icons/base';
 
-import Article from './Article/Article';
+import cheer1 from './Illustrations/cheer1.svg';
+import cheer2 from './Illustrations/cheer2.svg';
+import cheer3 from './Illustrations/cheer3.svg';
+
 import Post from './Post/Post';
 import UploadView from './UploadView/UploadView';
 
@@ -20,13 +24,22 @@ class Upload extends Component {
             pub_type: 2,
             first_name: '',
             last_name: '',
-            class: '',
-            categories: []
+            user_class: '',
+            categories: [],
+            post_content: "",
+            files: [],
+            errors: {},
+            success: false,
+            success_graphic_number: Math.floor(Math.random() * (4 - 1)) + 1
         };
 
         this.chooseCategory = this.chooseCategory.bind(this);
-        this.choosePublicationType = this.choosePublicationType.bind(this);
-        this.handleInputChange = this.handleInputChange.bind(this);        
+        this.handleInputChange = this.handleInputChange.bind(this);       
+        this.callbackFunction = this.callbackFunction.bind(this); 
+        this.callbackFiles = this.callbackFiles.bind(this);
+        this.removeFile = this.removeFile.bind(this);
+        this.validateForm = this.validateForm.bind(this);
+        this.submitPost = this.submitPost.bind(this);
     }
 
     componentDidMount() {
@@ -35,10 +48,6 @@ class Upload extends Component {
                 this.setState({ categories: res.data.categories });
             }
         });
-    }
-
-    componentWillUnmount() {
-
     }
 
     handleInputChange(e) {
@@ -56,18 +65,80 @@ class Upload extends Component {
         this.setState({ categories: categoriesCopy });
     }
 
-    choosePublicationType(type) {
-        if (type === 1 || type === 2) {
-            this.setState({ pub_type: type });
+    callbackFunction = (childData) => {
+        this.setState({post_content: childData});
+    }
+
+    callbackFiles = (files) => {        
+        const oldFiles = this.state.files;
+        oldFiles.push(files);
+        this.setState({ files: oldFiles });
+    }
+
+    removeFile = (file) => {
+        const { files } = this.state;
+        const index = files.findIndex(fl => fl.path === file.path);
+        let filesCopy = [...this.state.files];
+        filesCopy.splice(index, 1);
+        this.setState({ files: filesCopy });   
+    }
+
+    validateForm(choosed_category) {
+        const { first_name, last_name, user_class, post_content } = this.state; 
+        let errors = {};
+        
+        // if (!first_name.trim().length > 0) {
+        //     console.log('eeeee');
+        // }
+
+    }
+
+    submitPost = async (e) => {
+        e.preventDefault(); 
+        const formData = new FormData();
+        const { first_name, last_name, user_class, categories, post_content, files } = this.state; 
+        const choosedCategory = await categories.filter(category => category.choosed);        
+
+        if (choosedCategory.length > 0) {
+            for(var x = 0; x<files.length; x++) {
+                formData.append('ufiles', files[x])
+            }
+            formData.append("first_name", first_name);
+            formData.append("last_name", last_name);
+            formData.append("user_class", user_class);
+            formData.append("category_id", choosedCategory[0].id);
+            formData.append("post_content", post_content);
+            
+            axios.post(`${process.env.REACT_APP_GLOBAL_API_URL}/posts/create`, formData, {headers: { 'Content-Type': 'multipart/form-data' }}).then(result => {
+                console.log(result);
+                
+                this.setState({ success: true });
+                $("html, body").animate({ scrollTop: 0 }, "slow");
+            });
         }
     }
 
     render() {
-        const { pub_type, categories } = this.state;
+        const { categories, success, success_graphic_number } = this.state;
 
         return (
             <div className={s.wrap}>
-                <main className={s.main}>
+                {success ? <div className={s.success}>
+                    <div className={s.success__graphic}>
+                        {success_graphic_number === 1 ? <img src={cheer1}/> : null}
+                        {success_graphic_number === 2 ? <img src={cheer2}/> : null}
+                        {success_graphic_number === 3 ? <img src={cheer3}/> : null}
+                    </div>
+                    <div className={s.success__title}>
+                        <h3>Znakomicie!</h3>
+                    </div>
+                    <div className={s.success__text}>
+                        <p>Twoja twórczość została właśnie przesłana do naszego zespołu Ekipy Kopernika! Jeżeli wszystko będzie się zgadzało, to twoje cudo za niedługo pojawi się na stronie.</p>
+                    </div>
+                    <div className={s.success__action}>
+                        <Link to="/" className="bs-btn bs-btn--primary">Odkryj inne posty</Link>
+                    </div>
+                </div> : <main className={s.main}>
                     <div className={s.main__toph}>
                         <h2>Podziel się </h2>
                     </div>
@@ -95,9 +166,9 @@ class Upload extends Component {
                             />
                             <input
                                 type="text"
-                                name="class"
+                                name="user_class"
                                 placeholder="Klasa ..."
-                                value={this.state.class}
+                                value={this.state.user_class}
                                 onChange={this.handleInputChange}    
                                 autoComplete="off" 
                             />
@@ -132,31 +203,15 @@ class Upload extends Component {
                         </div>
                     </div>
 
-                    {/* <div className={s.type}>
-                        <div className={s.main__header}>
-                            <h4>Wybierz typ publikacji</h4>
-                        </div>
-                        <div className={s.type__content}>
-                            <div className={[s.type__item, pub_type == 2 ? s['type__item--active']:null].join(' ')} onClick={() => this.choosePublicationType(2)}>
-                                <Icon name="image"/>
-                                <p>Krótki post</p>
-                            </div>
-                            <div className={[s.type__item, pub_type == 1 ? s['type__item--active']:null].join(' ')} onClick={() => this.choosePublicationType(1)}>
-                                <Icon name="article"/>
-                                <p>Artykuł</p>
-                            </div>
-                        </div>
-                    </div> */}
-
                     <div className={s.content}>
                         <div className={s.content__left}>
-                            {/* {pub_type === 1 ? <Article user_data={{pub_type: this.state.pub_type, first_name: this.state.first_name, last_name: this.state.last_name, class: this.state.class}}/> : null} */}
                             <div className={cs(s.attachments, s.content__box)}>
                                 <div className={s.main__header}>
                                     <h4>Treść</h4>
+                                    <button>Zasady dodawania treści</button>
                                 </div>
                                 <div className={s.attachments__content}>
-                                    {pub_type === 2 ? <Post user_data={{pub_type: this.state.pub_type, first_name: this.state.first_name, last_name: this.state.last_name, class: this.state.class}}/> : null}
+                                    <Post parentCallback={this.callbackFunction}/>
                                 </div>
                             </div> 
                         </div>
@@ -164,14 +219,19 @@ class Upload extends Component {
                             <div className={s.attachments}>
                                 <div className={s.main__header}>
                                     <h4>Załączniki</h4>
+                                    <span>(.jpg, .jpeg, .png)</span>
                                 </div>
                                 <div className={s.attachments__content}>
-                                    <UploadView header={<div className={s.main__header}><h4>Dodane pliki</h4></div>} />
+                                    <UploadView parentFiles={this.callbackFiles} parentRemoveFile={this.removeFile} header={<div className={s.main__header}><h4>Dodane pliki</h4></div>} />
                                 </div>
                             </div> 
                         </div>
                     </div>
-                </main>
+
+                    {this.state.post_content.trim().length > 0 && this.state.first_name.trim().length > 0 && this.state.last_name.trim().length > 0 && this.state.user_class.trim().length > 0 && this.state.categories.filter(category => category.choosed).length > 0 ? <div className={s.submit}>
+                        <button type="submit" className="bs-btn bs-btn--primary" onClick={this.submitPost}>Opublikuj</button>
+                    </div> : null}
+                </main> }
             </div>
         )
     }

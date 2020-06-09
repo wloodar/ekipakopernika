@@ -13,31 +13,51 @@ class UploadView extends Component {
         };
 
         this.handleAttachedFiles = this.handleAttachedFiles.bind(this);
+        this.removeFile = this.removeFile.bind(this);
     }
 
     handleAttachedFiles(files) {
         files.forEach((val) => {              
             if (val.type.indexOf('image/') !== -1) {
-                Object.assign(val, {preview: URL.createObjectURL(val)});
-            } 
-            if (val.type.indexOf('application/pdf') !== -1) {
                 // Object.assign(val, {preview: URL.createObjectURL(val)});
+
+                const oldFiles = this.state.files;
+                oldFiles.push(val);
+                this.setState({ files: oldFiles });
+                
+                this.props.parentFiles(val);
+            } else {
+                alert("Narazie akceptujemy wyłącznie zdjęcia, niedługo coś nowego się pojawi ;)");
             }
-            if (val.type.indexOf('video/mp4') !== -1) {
-                // Object.assign(val, {preview: URL.createObjectURL(val)});
-            } 
+            // if (val.type.indexOf('application/pdf') !== -1) {
+            //     // Object.assign(val, {preview: URL.createObjectURL(val)});
+            // }
         });
 
-        this.setState(prevState => ({
-            files: [...prevState.files, ...files]
-        }))      
+        // this.setState(prevState => ({
+        //     files: [...prevState.files, ...files]
+        // }));
+    }
+
+    removeFile(file) {
+        const { files } = this.state;
+        const index = files.findIndex(fl => fl.path === file.path);
+        let filesCopy = [...this.state.files];
+        filesCopy.splice(index, 1);
+        this.setState({ files: filesCopy });     
+        
+        this.props.parentRemoveFile(file);
+    }
+
+    dropRejected() {
+        alert('Narazie akceptujemy wyłącznie zdjęcia, niedługo coś nowego się pojawi ;)');
     }
 
     render() {
 
         return (
             <>
-                <Dropzone onDrop={acceptedFiles => this.handleAttachedFiles(acceptedFiles)}>
+                <Dropzone onDrop={acceptedFiles => this.handleAttachedFiles(acceptedFiles)} accept={'.jpeg,.png,.jpg'} onDropRejected={this.dropRejected}>
                 {({getRootProps, getInputProps}) => (
                     <div {...getRootProps()} className={s.drop}>
                         <input {...getInputProps()} />
@@ -47,7 +67,7 @@ class UploadView extends Component {
                 </Dropzone>
                 {this.state.files.length > 0 ? this.props.header : null}
                 <div className={s.files}>
-                    <UploadPreview files={this.state.files}/>
+                    <UploadPreview files={this.state.files} removeFileParent={this.removeFile}/>
                 </div>
             </>
         )

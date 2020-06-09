@@ -9,13 +9,13 @@ function UploadPreview(props) {
 
     const imagePreview = (file) => (
         <div className={s.item__image}>
-            <img src={file.preview} onLoad={setTimeout(() => {
-                window.URL.revokeObjectURL(file.preview)
+            <img src={URL.createObjectURL(file)} onLoad={() => setTimeout(() => {
+                window.URL.revokeObjectURL(file)
             }, 100)}/>
             <div className={s.item__overlay}>
                 <div className={s.item__bottom}>
                     <Icon name="image"/>
-                    <button>Usuń</button>
+                    <button onClick={() => removeImage(file, props)}>Usuń</button>
                 </div>
             </div>
         </div>
@@ -30,9 +30,9 @@ function UploadPreview(props) {
     );
 
     const previews = props.files.map((file, key) => (
-        <div className={s.item}>
+        <div className={s.item} key={key}>
             {file.type.indexOf("image/") !== -1 ? imagePreview(file) : null}
-            {file.type.indexOf("application/pdf") !== -1 ? pdfPreview(file) : null}
+            {/* {file.type.indexOf("application/pdf") !== -1 ? pdfPreview(file) : null} */}
         </div>
     ));
 
@@ -41,6 +41,10 @@ function UploadPreview(props) {
             {previews}
         </>
     )
+}
+
+const removeImage = (file, props) => {
+    props.removeFileParent(file);
 }
 
 function getBase64(file, cb) {

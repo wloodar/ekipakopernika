@@ -1,6 +1,7 @@
 import React, { Component, createRef } from 'react';
 import { NavLink, Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
+import cs from 'classnames';
 import PropTypes from 'prop-types';
 import s from './AppLayout.module.scss';
 import $ from 'jquery';
@@ -15,24 +16,45 @@ class AppLayout extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            
+            width: 0, 
+            height: 0
         };
 
+        this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
         this.changeUnderlinePosition = this.changeUnderlinePosition.bind();
     }
 
     componentDidMount() {
+        this.updateWindowDimensions();
+        window.addEventListener('resize', this.updateWindowDimensions);
         this.updateUnderlinePosition();
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener('resize', this.updateWindowDimensions);
     }
 
     componentDidUpdate() {
         this.updateUnderlinePosition();
     }
 
-    updateUnderlinePosition() {
+    updateWindowDimensions() {
+        this.setState({ width: window.innerWidth, height: window.innerHeight });
+    }
+
+    updateUnderlinePosition = (isAnimated) => {
         let menu = document.getElementById('mn_nav');
         if (menu) {
             let sliding_border = document.getElementById('nav_slide_click');
+
+            console.log(isAnimated);
+            
+            if (isAnimated !== undefined && !isAnimated) {
+                sliding_border.style.transition = "none";
+            } else {
+                sliding_border.style.transition = ".3s all ease";
+            }
+
             const lengthOfItems = $('#mn_nav').children('li').length;
             
             const widthOfElement = Math.round(100 / lengthOfItems);
@@ -60,6 +82,8 @@ class AppLayout extends Component {
 
         if (menu) {
             let menu_slider_click = document.getElementById('nav_slide_click');
+            menu_slider_click.style.transition = ".3s all ease";
+
             if ( menu_slider_click ) {
               nav_slider( menu, function( el, width, tempMarginLeft ) {   
                     el.onclick = () => {
@@ -121,7 +145,7 @@ class AppLayout extends Component {
             <nav className={s.nav}>
                 <div className={s['nav__inner']}>
                     <h3><Link to="/">#EkipaKopernika</Link></h3>
-                    <div className={s['nav-list']}>
+                    {this.state.width > 900 ? <div className={s['nav-list']}>
                         <ul id="mn_nav">
                             <li><NavLink exact to="/" activeClassName={[s['nav-list--active'], "mn_nav_active"].join(' ')}>Odkryj</NavLink></li>
                             <li><NavLink to="/kategorie" activeClassName={[s['nav-list--active'], "mn_nav_active"].join(' ')}>Kategorie</NavLink></li>
@@ -129,13 +153,27 @@ class AppLayout extends Component {
                             <li><NavLink to="/onas" activeClassName={[s['nav-list--active'], "mn_nav_active"].join(' ')}>O nas</NavLink></li>
                             <hr id="nav_slide_click"/>
                         </ul>
-                    </div>
+                    </div> : null}
                     {/* <Link to="/dodaj">Podziel się</Link> */}
                     <div className={s['nav-share']}>
                         <Link to="/dodaj">
                             <p>Podziel się</p>
-                            <Icon name="uploadcloud"/>
+                            {/* <Icon name="uploadcloud"/> */}
                         </Link>
+                    </div>
+                </div>
+                <div className={s['nav-responsive']}>
+                    <div className={s['nav-responsive__menu']}>
+                        <div className={cs(s["nav-responsive__fade"], s["nav-responsive__fade--left"])}></div>
+                        <div className={cs(s["nav-responsive__fade"], s["nav-responsive__fade--right"])}></div>
+                        {this.state.width <= 900 ?
+                            <ul id="mn_nav" onScroll={() => this.updateUnderlinePosition(false)}>
+                                <li><NavLink exact to="/" activeClassName={[s['nav-list--active'], "mn_nav_active"].join(' ')}>Odkryj</NavLink></li>
+                                <li><NavLink to="/kategorie" activeClassName={[s['nav-list--active'], "mn_nav_active"].join(' ')}>Kategorie</NavLink></li>
+                                <li><NavLink to="/wydarzenia" activeClassName={[s['nav-list--active'], "mn_nav_active"].join(' ')}>Wydarzenia</NavLink></li>
+                                <li><NavLink to="/onas" activeClassName={[s['nav-list--active'], "mn_nav_active"].join(' ')}>O nas</NavLink></li>
+                                <hr id="nav_slide_click"/>
+                            </ul> : null}
                     </div>
                 </div>
             </nav>
@@ -155,8 +193,13 @@ class AppLayout extends Component {
                     <div className={s['footer__banner']}>
                         <img src={FooterBanner}/>
                     </div>
-                    <div className={s['footer__copyright']}>
-                        <p>© 2020 drużynakopernika</p>
+                    <div className={s['footer__bottom']}>
+                        <div className={s['footer__author']}>
+                            <p>Wykonał: <a href="https://www.instagram.com/wloda_r/" target="_blank">Jakub Włodarczyk - @wloda_r</a></p>
+                        </div>
+                        <div className={s['footer__copyright']}>
+                            <p>© 2020 EkipaKopernika</p>
+                        </div>
                     </div>
                 </div>
             </footer>
