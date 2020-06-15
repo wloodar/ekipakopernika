@@ -4,8 +4,7 @@ import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
 import { createUrl } from '../../../functions/ImageUrl';
 import axios from 'axios';
 import s from './Explore.module.scss';
-
-import Feed from './Feed/Feed';
+import Posts from './Posts/Posts';
 
 class Explore extends Component {
 
@@ -22,12 +21,6 @@ class Explore extends Component {
             if (res.data.status === 1) {
                 this.setState({ categories: shuffle(res.data.categories).slice(0, 5) });
             }
-        });
-
-        axios.get(`${process.env.REACT_APP_GLOBAL_API_URL}/posts/feed/fetch`, { params: { page: 1, limit: 10 }}).then(result => {
-            console.log(result.data);
-            
-            this.setState({ feed: result.data.feed });
         });
 
         function shuffle(a) {
@@ -81,9 +74,9 @@ class Explore extends Component {
                         </div>
                     </div>
                 </aside>
-                <main className={s.feed}>
+                <main className={s.feed} id="feed_explore">
                     <div className={s['feed-wrapper']}>
-                        <Feed data={this.state.feed}/>
+                        <Posts apiUrl="/posts/feed/fetch"/>
                     </div>
                 </main>
                 <div className={[s.sidebar, s.sticky].join(' ')}>

@@ -16,6 +16,8 @@ class AppLayout extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            prevScrollpos: null,
+            visible: true,
             width: 0, 
             height: 0
         };
@@ -27,12 +29,26 @@ class AppLayout extends Component {
     componentDidMount() {
         this.updateWindowDimensions();
         window.addEventListener('resize', this.updateWindowDimensions);
+        window.addEventListener("scroll", this.handleScroll);
         this.updateUnderlinePosition();
     }
 
     componentWillUnmount() {
         window.removeEventListener('resize', this.updateWindowDimensions);
+        window.removeEventListener("scroll", this.handleScroll);
     }
+
+    handleScroll = () => {
+        const { prevScrollpos } = this.state;
+
+        const currentScrollPos = window.pageYOffset;
+        const visible = prevScrollpos > currentScrollPos;
+
+        this.setState({
+            prevScrollpos: currentScrollPos,
+            visible
+        });
+    };
 
     componentDidUpdate() {
         this.updateUnderlinePosition();
@@ -46,8 +62,6 @@ class AppLayout extends Component {
         let menu = document.getElementById('mn_nav');
         if (menu) {
             let sliding_border = document.getElementById('nav_slide_click');
-
-            console.log(isAnimated);
             
             if (isAnimated !== undefined && !isAnimated) {
                 sliding_border.style.transition = "none";
@@ -142,7 +156,7 @@ class AppLayout extends Component {
 
         return (
             <>
-            <nav className={s.nav}>
+            <nav className={cs(s.nav, this.state.width <= 900 && this.state.visible === false && $(window).scrollTop() > 5 ? s["nav--hidden"] : null)}>
                 <div className={s['nav__inner']}>
                     <h3><Link to="/">#EkipaKopernika</Link></h3>
                     {this.state.width > 900 ? <div className={s['nav-list']}>

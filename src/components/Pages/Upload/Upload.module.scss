@@ -44,6 +44,10 @@
     @include globalWidth;
     overflow: visible !important;
 
+    @include respond(tab-port) {
+        padding-left: 0 !important; padding-right: 0 !important;
+    }
+
     &__toph {
         background: url('./background.png');
         background-size: cover;
@@ -52,6 +56,10 @@
         text-align: center;
         border-radius: $border_radius;
 
+        @include respond(tab-port) {
+            border-radius: 0;
+        }
+
         h2 {
             // padding-top: 6.5rem; padding-bottom: 6.4rem;
             padding-top: 7.1rem; padding-bottom: 7rem;
@@ -59,7 +67,9 @@
             font-weight: 800;
             
             @include respond(tab-port) {
-                padding-top: 8.7rem;
+                padding-top: 10.7rem;
+                padding-bottom: 9.6rem;
+                font-size: 2.7rem;
             }
         }
     }
@@ -95,6 +105,12 @@
 }
 
 .person {
+    
+    &__container {
+        @include respond(tab-port) {
+            @include globalWidth;
+        }
+    }
 
     &__form {
 
@@ -132,6 +148,9 @@
 }
 
 .categories {
+    @include respond(tab-port) {
+        @include globalWidth;
+    }
 
     &__grid {
         display: grid;
@@ -320,6 +339,7 @@
 
     @include respond(tab-port) {
         display: block;
+        @include globalWidth;
     }
 
     &__left {
@@ -361,7 +381,9 @@
 }
 
 .attachments {
-
+    // @include respond(tab-port) {
+    //     @include globalWidth;
+    // }
 }
 
 .admin {

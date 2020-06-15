@@ -4,6 +4,7 @@ import axios from 'axios';
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
 import { createUrl } from '../../../../functions/ImageUrl';
 import Feed from '../../Explore/Feed/Feed';
+import Posts from '../../Explore/Posts/Posts';
 import s from './CategoriesDetails.module.scss';
 
 class CategoriesDetails extends Component {
@@ -55,14 +56,9 @@ class CategoriesDetails extends Component {
     }
 
     fetchCurrentCategory() {
+        this.setState({ category: {} });
         axios.get(`${process.env.REACT_APP_GLOBAL_API_URL}/categories/exact/${this.props.match.params.name}`).then(data => {
-            this.setState({ category: data.data.category });
-            console.log(data.data.category.image);
-            
-            axios.get(`${process.env.REACT_APP_GLOBAL_API_URL}/posts/category/posts`, { params: { page: 1, limit: 10, category_id: data.data.category.id }}).then(result => {
-                this.setState({ posts: result.data.posts });
-                console.log(result.data.posts);
-            });
+            this.setState({ category: data.data.category });            
         });
     }
 
@@ -96,7 +92,7 @@ class CategoriesDetails extends Component {
                                         </div>
                                     </div>    
                                 </div>
-                            )) : categories.slice(0,4).map((obj, key) => <div className={s['categories-item']}>
+                            )) : categories.slice(0,5).map((obj, key) => obj.seo_url === this.props.match.params.name ? null : <div className={s['categories-item']}>
                                 <Link to={`/kategorie/${obj.seo_url}`}></Link>
                                 <div className={s['categories-item__inner']}>
                                     <div className={s['categories-item__image']}>
@@ -132,7 +128,7 @@ class CategoriesDetails extends Component {
                         <h4 className="bs-header">Posty w kategorii</h4>
                     </div> : null} 
                     <div className={s.feed__inner}>
-                        <Feed data={this.state.posts}/>
+                        {this.state.category.id !== undefined ? <Posts apiUrl={`/posts/category/posts/${this.state.category.id}`}/> : null}
                     </div>
                 </div>
                 <div className={s.share}>

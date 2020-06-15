@@ -143,50 +143,53 @@ class Upload extends Component {
                         <h2>Podziel się </h2>
                     </div>
 
-                    <div className={s.main__header}>
-                        <h4>Dane osobowe</h4>
+                    <div className={s.person__container}>
+                        <div className={s.main__header}>
+                            <h4>Dane osobowe</h4>
+                        </div>
+                        
+                        {!this.props.auth.isAuthenticated ? <div className={s.person}>
+                            <div className={s.person__form}>
+                                <input
+                                    type="text"
+                                    name="first_name"
+                                    placeholder="Imię ..."
+                                    value={this.state.first_name}
+                                    onChange={this.handleInputChange}   
+                                    autoComplete="off" 
+                                />
+                                <input
+                                    type="text"
+                                    name="last_name"
+                                    placeholder="Nazwisko ..."
+                                    value={this.state.last_name}
+                                    onChange={this.handleInputChange}    
+                                    autoComplete="off" 
+                                />
+                                <input
+                                    type="text"
+                                    name="user_class"
+                                    placeholder="Klasa ..."
+                                    value={this.state.user_class}
+                                    onChange={this.handleInputChange}    
+                                    autoComplete="off" 
+                                />
+                            </div>
+                        </div> : <div className={s.admin}>
+                            <div className={s.admin__user}>
+                                <div className={cs(this.props.auth.user.role === "superadmin" ? "bs-gradient--turquoise" : "bs-gradient--pink", s.admin__icon)}>
+                                    <span>{this.props.auth.user.first_name.charAt(0)}</span>
+                                </div>
+                                <div className={s.admin__name}>
+                                    <p>{this.props.auth.user.first_name + " " + this.props.auth.user.last_name}</p>
+                                    <span>{this.props.auth.user.email}</span>
+                                </div>
+                            </div>   
+                            <div className={s.admin__panel}>
+                                <a href="/admin34528" className={this.props.auth.user.role === "superadmin" ? "bs-gradient--turquoise" : "bs-gradient--pink"}>Panel Admina</a>
+                            </div>
+                        </div>}
                     </div>
-                    {!this.props.auth.isAuthenticated ? <div className={s.person}>
-                        <div className={s.person__form}>
-                            <input
-                                type="text"
-                                name="first_name"
-                                placeholder="Imię ..."
-                                value={this.state.first_name}
-                                onChange={this.handleInputChange}   
-                                autoComplete="off" 
-                            />
-                            <input
-                                type="text"
-                                name="last_name"
-                                placeholder="Nazwisko ..."
-                                value={this.state.last_name}
-                                onChange={this.handleInputChange}    
-                                autoComplete="off" 
-                            />
-                            <input
-                                type="text"
-                                name="user_class"
-                                placeholder="Klasa ..."
-                                value={this.state.user_class}
-                                onChange={this.handleInputChange}    
-                                autoComplete="off" 
-                            />
-                        </div>
-                    </div> : <div className={s.admin}>
-                        <div className={s.admin__user}>
-                            <div className={cs(this.props.auth.user.role === "superadmin" ? "bs-gradient--turquoise" : "bs-gradient--pink", s.admin__icon)}>
-                                <span>{this.props.auth.user.first_name.charAt(0)}</span>
-                            </div>
-                            <div className={s.admin__name}>
-                                <p>{this.props.auth.user.first_name + " " + this.props.auth.user.last_name}</p>
-                                <span>{this.props.auth.user.email}</span>
-                            </div>
-                        </div>   
-                        <div className={s.admin__panel}>
-                            <a href="/admin34528" className={this.props.auth.user.role === "superadmin" ? "bs-gradient--turquoise" : "bs-gradient--pink"}>Panel Admina</a>
-                        </div>
-                    </div>}
 
                     <div className={s.categories}>
                         <div className={s.main__header}>
