@@ -5,6 +5,8 @@ import PropTypes from 'prop-types';
 import cs from 'classnames';
 import axios from 'axios';
 import $ from 'jquery';
+import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
+import _ from 'lodash';
 import { createUrl } from '../../../functions/ImageUrl';
 import s from './Upload.module.scss';
 import Icon from '../../Icons/base';
@@ -26,6 +28,7 @@ class Upload extends Component {
             last_name: '',
             user_class: '',
             categories: [],
+            loading_categories: true,
             post_content: "",
             files: [],
             errors: {},
@@ -45,7 +48,7 @@ class Upload extends Component {
     componentDidMount() {
         axios.get(`${process.env.REACT_APP_GLOBAL_API_URL}/categories/all`, { params: { cache_id: "Categories_All" } }).then(res => {
             if (res.data.status === 1) {
-                this.setState({ categories: res.data.categories });
+                this.setState({ categories: res.data.categories, loading_categories: false });
             }
         });
     }
@@ -119,7 +122,7 @@ class Upload extends Component {
     }
 
     render() {
-        const { categories, success, success_graphic_number } = this.state;
+        const { categories, loading_categories, success, success_graphic_number } = this.state;
 
         return (
             <div className={s.wrap}>
@@ -196,7 +199,11 @@ class Upload extends Component {
                             <h4>Wybierz kategorie</h4>
                         </div>
                         <div className={s.categories__grid}>
-                            {categories.map((obj, key) => <div className={cs(s.categories__item, obj.choosed !== undefined && obj.choosed ? s["categories__item--active"] : null)} onClick={this.chooseCategory.bind(this, obj.id)} key={obj.id}>
+                            {this.state.loading_categories ? _.times(12, () => <div className={cs(s.categories__item, s['categories__item--loading'])}>
+                                <SkeletonTheme color="#EDF0F3">
+                                    <Skeleton/>
+                                </SkeletonTheme>
+                            </div>) : categories.map((obj, key) => <div className={cs(s.categories__item, obj.choosed !== undefined && obj.choosed ? s["categories__item--active"] : null)} onClick={this.chooseCategory.bind(this, obj.id)} key={obj.id}>
                                 <img src={createUrl(obj.cover_pic, "_small")}/>
                                 <div className={s['categories__item--name']}>
                                     <p>{obj.name}</p>

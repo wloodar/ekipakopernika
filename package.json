@@ -21,6 +21,7 @@
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
     "react-addons-css-transition-group": "^15.6.2",
+    "react-copy-to-clipboard": "^5.0.2",
     "react-dom": "^16.13.1",
     "react-dropzone": "^11.0.1",
     "react-infinite-scroll-component": "^5.0.5",

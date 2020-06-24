@@ -6,6 +6,8 @@ import axios from 'axios';
 import s from './Explore.module.scss';
 import Posts from './Posts/Posts';
 
+import Logo from './logo.png';
+
 class Explore extends Component {
 
     constructor(props) {
@@ -76,6 +78,10 @@ class Explore extends Component {
                 </aside>
                 <main className={s.feed} id="feed_explore">
                     <div className={s['feed-wrapper']}>
+                        <div className={s['feed-wrapper__logo']}>
+                            <h5>Witaj! <Link to="/onas">{"Poznaj nas >"}</Link></h5>
+                            <img src={Logo}/>
+                        </div>
                         <Posts apiUrl="/posts/feed/fetch"/>
                     </div>
                 </main>
@@ -88,6 +94,12 @@ class Explore extends Component {
                             <div className={s.events__empty}>
                                 <p>Brak wydarzeń</p>
                             </div>
+                        </div>
+                        <div className={s.sidebar__footer}>
+                            <ul>
+                                <li>© 2020 EkipaKopernika</li>
+                                <li>Wykonał: <a href="https://www.instagram.com/wloda_r/" target="_blank">@wloda_r</a></li>
+                            </ul>
                         </div>
                     </div>
                 </div>

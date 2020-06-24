@@ -11,6 +11,12 @@
     margin-left: auto; margin-right: auto;
     text-align: center;
 
+    @include respond(phone) {
+        @include globalWidth;
+        width: 80%;
+        margin-top: calc(5.7rem + 7vh);
+    }
+
     &__title {
         margin-top: 4.7rem;
 
@@ -24,10 +30,15 @@
         margin-top: 1.2rem;
 
         p {
-            font-size: 1.6rem;
-            line-height: 1.8;
-            font-weight: 500;
-            color: darken($color: #EDF0F3, $amount: 50%);
+            // font-size: 1.6rem;
+            // line-height: 1.8;
+            // font-weight: 500;
+            // color: darken($color: #EDF0F3, $amount: 50%);
+            font-size: 1.4rem;
+            font-weight: 600;
+            line-height: 1.5;
+            color: rgba(41, 41, 41, 1);
+            white-space: pre-wrap;
         }
     }
 
@@ -35,6 +46,7 @@
         margin-top: 3.4rem;
 
         a {
+            display: inline-block;
             font-weight: 700;
         }
     }
@@ -202,6 +214,19 @@
             }
 
             transform: scale(1.03);
+        }
+
+        &--loading {
+            span {
+                height: 14rem !important;
+                line-height: unset !important;
+                opacity: 1 !important;
+                transform: none !important;
+            }
+
+            &::after {
+                background: transparent;
+            }
         }
 
         &--active {

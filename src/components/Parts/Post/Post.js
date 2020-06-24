@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import cs from 'classnames';
 import { format } from 'timeago.js';
@@ -8,6 +8,7 @@ import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
 import ReadMore from '@crossfield/react-read-more';
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
+import CopyToClipboard from 'react-copy-to-clipboard';
 import _ from 'lodash';
 
 import s from './Post.module.scss';
@@ -16,17 +17,24 @@ import { post } from 'jquery';
 function Post(props) {
 
     const { data } = props;
+    const [buttonText, setButtonText] = useState("Skopiuj");
+    const changeText = (text) => setButtonText(text);
 
     const ordinaryPost = () => (
         <div className={s.item}>
             <div className={s["ordinary-name"]}>
-                <div className={s["ordinary-name__icon"]}>
-                    <Link to={"/kategorie/" + data.category.seo_url}><img src={createUrl(data.category.image, "_cropped-small")}/></Link>
+                <div className={s["ordinary-name__info"]}>
+                    <div className={s["ordinary-name__icon"]}>
+                        <Link to={"/kategorie/" + data.category.seo_url}><img src={createUrl(data.category.image, "_cropped-small")}/></Link>
+                    </div>
+                    <div className={s["ordinary-name__person"]}>
+                        <h5><Link to={"/kategorie/" + data.category.seo_url}>{data.category.name}</Link></h5>
+                        <p>{data.first_name + " " + data.last_name}</p>
+                    </div>  
                 </div>
-                <div className={s["ordinary-name__person"]}>
-                    <h5><Link to={"/kategorie/" + data.category.seo_url}>{data.category.name}</Link></h5>
-                    <p>{data.first_name + " " + data.last_name}</p>
-                </div>  
+                <div className={s["ordinary-name__date"]}>
+                    <p>{format(new Date(data.created_at))}</p>
+                </div>
             </div>
             <div className={s["ordinary-content"]}>
                 <ReadMore
@@ -50,12 +58,29 @@ function Post(props) {
                     </div>
                 ))}
             </div>
-            <div className={s["ordinary-bottom"]}>
+            {/* <div className={s["ordinary-bottom"]}>
                 <div className={s["ordinary-bottom__date"]}>
                     <p>{format(new Date(data.created_at))}</p>
                 </div>
                 <div className={s["ordinary-bottom__action"]}>
                     <button>Udostępnij</button>
+                </div>
+            </div> */}
+            <div className={s["ordinary-share"]}>
+                <div className={s["ordinary-share__info"]}>
+                    <div className={s["ordinary-share__header"]}>
+                        <h5>Udostępnij post: {data.first_name + " " + data.last_name}</h5>
+                    </div>
+                    <div className={s["ordinary-share__link"]}>
+                        <p>{"http://ekipakopernika.pl/" + data.shortid}</p>
+                    </div>
+                </div>
+                <div className={s["ordinary-share__action"]}>
+                    <CopyToClipboard text={process.env.REACT_APP_GLOBAL_URL + "/" + data.shortid}>
+                        <button className="bs-btn bs-btn--primary" onClick={(e) => {changeText("Skopiowano"); setTimeout(() => {
+                            changeText("Skopiuj");
+                        }, 700);}}>{buttonText}</button>
+                    </CopyToClipboard>
                 </div>
             </div>
         </div>
@@ -87,7 +112,7 @@ function Post(props) {
                     <Skeleton height={300}/>
                 </SkeletonTheme>
             </div>
-            <div className={s["ordinary-bottom"]}>
+            {/* <div className={s["ordinary-bottom"]}>
                 <div className={s["ordinary-bottom__date"]}>
                     <SkeletonTheme color="#EDF0F3">
                         <Skeleton height={30} width={80}/>
@@ -98,7 +123,7 @@ function Post(props) {
                         <Skeleton width={60}/>
                     </SkeletonTheme></button>
                 </div>
-            </div>
+            </div> */}
         </div>
     );
 

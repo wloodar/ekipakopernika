@@ -60,6 +60,13 @@
     position: relative;
     @include createTransition(.4s, cubic-bezier(.38,.41,.26,1));
 
+    &--loading {
+        span {
+            height: 26rem;
+            line-height: unset;
+        }
+    }
+
     @media screen and (min-width: 75em) {
         &:nth-of-type(4n) {
             margin-right: 0 !important;

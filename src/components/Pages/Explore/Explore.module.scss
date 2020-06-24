@@ -159,6 +159,25 @@
         position: sticky;
     }
 
+    &__footer {
+        margin-top: 1.4rem;
+
+        ul {
+            li {
+                display: inline-block;
+                padding-top: .3rem;
+                padding-left: .9rem;
+                font-size: 1rem;
+                font-weight: 600;
+                color: darken($color: #EDF0F3, $amount: 25%);
+
+                &:first-of-type {
+                    padding-left: 0;
+                }
+            }
+        }
+    }
+
     @include respond(tab-land) {
         display: none;
     }
@@ -277,7 +296,7 @@
     width: calc(100% - 57rem);
 
     @include respond(tab-land) {
-        width: auto;
+        width: 100%;
         max-width: 65rem;
         margin-left: auto; margin-right: auto;
     }
@@ -295,5 +314,39 @@
 
     @include respond(tab-port) {
         padding-top: $main_top_padding__phone;
+    }
+
+    &__logo {
+        margin-bottom: 2.7rem;
+        text-align: center;
+
+        h5 {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: #fff;
+            background: var(--primary);
+            border-radius: 100px;
+            padding: .7rem 0;
+            margin: 0 4.2rem 2.1rem;
+
+            @include respond(tab-land) {
+                margin: 0 0 1.7rem;
+            }
+        }   
+
+        a {
+            font-size: 1.3rem;
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+
+        img {
+            @include respond(phone) {
+                width: 80%;
+                margin-left: auto; margin-right: auto;
+            }
+        }
     }
 }
