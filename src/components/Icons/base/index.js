@@ -7,6 +7,9 @@ import UploadCloud from '../UploadCloud';
 import Article from '../Article';
 import Image from '../Image';
 
+import Compass from '../Compass';
+import Categories from '../Categories';
+
 const Icon = props => {
   switch (props.name) {
     case "checkmarkcircle":
@@ -21,6 +24,10 @@ const Icon = props => {
       return <Article {...props} />;
     case "image":
       return <Image {...props} />;
+    case "compass":
+      return <Compass {...props} />;
+    case "categories":
+      return <Categories {...props} />;
     default:
       return;
   }

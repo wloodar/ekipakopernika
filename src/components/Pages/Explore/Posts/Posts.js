@@ -3,6 +3,8 @@ import { withRouter, Link } from 'react-router-dom';
 import InfiniteScroll from "react-infinite-scroll-component";
 import axios from 'axios';
 import Feed from '../Feed/Feed';
+import Post from '../../../Parts/Post/Post';
+import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
 import s from './Posts.module.scss';
 
 class Posts extends Component {
@@ -43,17 +45,21 @@ class Posts extends Component {
     }
 
     render() {
+        const { loading_feed } = this.state;
         return (
-            <InfiniteScroll
+            <>{loading_feed ? <Post post_type={0} loading_count={3}/> : <InfiniteScroll
                 dataLength={this.state.posts.length}
                 next={this.fetchMoreFeed}
                 hasMore={this.state.pagination}
                 loader={<div className={s.loading}>
-                    <p>Ładowanie ...</p>
+                    <SkeletonTheme color="#EDF0F3">
+                        <Skeleton />
+                    </SkeletonTheme>
+                    <p>Ładowanie postów ...</p>
                 </div>}
             >
                 <Feed data={this.state.posts}/>
-            </InfiniteScroll>
+            </InfiniteScroll>}</>
         )
     }
 }

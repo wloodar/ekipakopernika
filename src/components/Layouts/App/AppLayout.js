@@ -16,8 +16,6 @@ class AppLayout extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            prevScrollpos: null,
-            visible: true,
             width: 0, 
             height: 0
         };
@@ -29,26 +27,12 @@ class AppLayout extends Component {
     componentDidMount() {
         this.updateWindowDimensions();
         window.addEventListener('resize', this.updateWindowDimensions);
-        window.addEventListener("scroll", this.handleScroll);
         this.updateUnderlinePosition();
     }
 
     componentWillUnmount() {
         window.removeEventListener('resize', this.updateWindowDimensions);
-        window.removeEventListener("scroll", this.handleScroll);
     }
-
-    handleScroll = () => {
-        const { prevScrollpos } = this.state;
-
-        const currentScrollPos = window.pageYOffset;
-        const visible = prevScrollpos > currentScrollPos;
-
-        this.setState({
-            prevScrollpos: currentScrollPos,
-            visible
-        });
-    };
 
     componentDidUpdate() {
         this.updateUnderlinePosition();
@@ -156,14 +140,14 @@ class AppLayout extends Component {
 
         return (
             <>
-            <nav className={cs(s.nav, this.state.width <= 900 && this.state.visible === false && $(window).scrollTop() > 5 ? s["nav--hidden"] : null)}>
+            <nav className={s.nav}>
                 <div className={s['nav__inner']}>
                     <h3><Link to="/">#EkipaKopernika</Link></h3>
                     {this.state.width > 900 ? <div className={s['nav-list']}>
                         <ul id="mn_nav">
                             <li><NavLink exact to="/" activeClassName={[s['nav-list--active'], "mn_nav_active"].join(' ')}>Odkryj</NavLink></li>
                             <li><NavLink to="/kategorie" activeClassName={[s['nav-list--active'], "mn_nav_active"].join(' ')}>Kategorie</NavLink></li>
-                            <li><NavLink to="/wydarzenia" activeClassName={[s['nav-list--active'], "mn_nav_active"].join(' ')}>Wydarzenia</NavLink></li>
+                            {/* <li><NavLink to="/wydarzenia" activeClassName={[s['nav-list--active'], "mn_nav_active"].join(' ')}>Wydarzenia</NavLink></li> */}
                             <li><NavLink to="/onas" activeClassName={[s['nav-list--active'], "mn_nav_active"].join(' ')}>O nas</NavLink></li>
                             <hr id="nav_slide_click"/>
                         </ul>
@@ -182,10 +166,12 @@ class AppLayout extends Component {
                         <div className={cs(s["nav-responsive__fade"], s["nav-responsive__fade--right"])}></div>
                         {this.state.width <= 900 ?
                             <ul id="mn_nav" onScroll={() => this.updateUnderlinePosition(false)}>
+                                <h5><Link to="/">#EkipaKopernika</Link></h5>
                                 <li><NavLink exact to="/" activeClassName={[s['nav-list--active'], "mn_nav_active"].join(' ')}>Odkryj</NavLink></li>
                                 <li><NavLink to="/kategorie" activeClassName={[s['nav-list--active'], "mn_nav_active"].join(' ')}>Kategorie</NavLink></li>
-                                <li><NavLink to="/wydarzenia" activeClassName={[s['nav-list--active'], "mn_nav_active"].join(' ')}>Wydarzenia</NavLink></li>
+                                {/* <li><NavLink to="/wydarzenia" activeClassName={[s['nav-list--active'], "mn_nav_active"].join(' ')}>Wydarzenia</NavLink></li> */}
                                 <li><NavLink to="/onas" activeClassName={[s['nav-list--active'], "mn_nav_active"].join(' ')}>O nas</NavLink></li>
+                                <li><NavLink to="/dodaj" activeClassName={[s['nav-list--active'], "mn_nav_active"].join(' ')}>Podziel się</NavLink></li>
                                 <hr id="nav_slide_click"/>
                             </ul> : null}
                     </div>

@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter, Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import s from './Events.module.scss';
 
 import EventCover from './example.jpg';
@@ -11,6 +13,8 @@ class Events extends Component {
         this.state = {
             events: [1,1]
         };
+
+        this.props.history.push('/');
     }
 
     render() {
@@ -51,7 +55,17 @@ class Events extends Component {
     }
 }
 
-export default withRouter(Events);
+Events.propTypes = {
+    auth: PropTypes.object,
+    location: PropTypes.object,
+    history: PropTypes.object.isRequired
+};
+
+const mapStateToProps = (state) => ({
+    auth: state.auth
+});
+
+export default withRouter(connect(mapStateToProps)(Events));
 
 // import React, { Component } from 'react';
 // import { withRouter, Link } from 'react-router-dom';

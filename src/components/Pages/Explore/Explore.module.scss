@@ -11,7 +11,7 @@
     position: relative;
 
     &__mheader {
-        margin-bottom: 1.7rem;
+        margin-bottom: 2.4rem;
 
         h5 {
             font-size: 2rem;
@@ -284,17 +284,16 @@
 }
 
 .feed-wrapper {
-    // padding-top: 2.4rem;
     padding-top: $main_top_padding;
-    // width: 67rem;
     width: 57rem;
     margin-left: auto; margin-right: auto;
     box-sizing: border-box;
-    // border-left: 1px solid #D8E8FF;
-    // border-right: 1px solid #D8E8FF;
-    // background: #D8E8FF;
 
     @include respond(tab-land) {
         width: 100%;
+    }
+
+    @include respond(tab-port) {
+        padding-top: $main_top_padding__phone;
     }
 }

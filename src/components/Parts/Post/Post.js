@@ -1,0 +1,110 @@
+import React from 'react';
+import { Link } from 'react-router-dom';
+import cs from 'classnames';
+import { format } from 'timeago.js';
+import { createUrl } from '../../../functions/ImageUrl';
+import 'react-medium-image-zoom/dist/styles.css';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/blur.css';
+import ReadMore from '@crossfield/react-read-more';
+import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
+import _ from 'lodash';
+
+import s from './Post.module.scss';
+import { post } from 'jquery';
+
+function Post(props) {
+
+    const { data } = props;
+
+    const ordinaryPost = () => (
+        <div className={s.item}>
+            <div className={s["ordinary-name"]}>
+                <div className={s["ordinary-name__icon"]}>
+                    <Link to={"/kategorie/" + data.category.seo_url}><img src={createUrl(data.category.image, "_cropped-small")}/></Link>
+                </div>
+                <div className={s["ordinary-name__person"]}>
+                    <h5><Link to={"/kategorie/" + data.category.seo_url}>{data.category.name}</Link></h5>
+                    <p>{data.first_name + " " + data.last_name}</p>
+                </div>  
+            </div>
+            <div className={s["ordinary-content"]}>
+                <ReadMore
+                    initialHeight={200}
+                    readMore={props => (
+                        <button onClick={props.onClick}>{props.open ? 'Ukryj tekst' : 'Czytaj więcej'}</button>
+                    )}
+                    >
+                    <p>
+                        {data.content}
+                    </p>
+                </ReadMore>
+            </div>
+            <div className={cs(s["ordinary-images"], data.attachments.length === 1 ? s["ordinary-images__single"] : s["ordinary-images__multiple"])}>
+                {data.attachments.map((val, key) => (
+                    <div className={s["ordinary-images__item"]}>
+                        <LazyLoadImage
+                            src={createUrl(val.attachment_url,  data.attachments.length === 1 ? "_medium" : "_small")} // use normal <img> attributes as props
+                            effect="blur"
+                        />
+                    </div>
+                ))}
+            </div>
+            <div className={s["ordinary-bottom"]}>
+                <div className={s["ordinary-bottom__date"]}>
+                    <p>{format(new Date(data.created_at))}</p>
+                </div>
+                <div className={s["ordinary-bottom__action"]}>
+                    <button>Udostępnij</button>
+                </div>
+            </div>
+        </div>
+    );
+
+    const loadingPost = () => (
+        <div className={s.item}>
+            <div className={s["ordinary-name"]}>
+                <div className={s["ordinary-name__icon"]}>
+                    <Link><SkeletonTheme color="#EDF0F3">
+                        <Skeleton height={300}/>
+                    </SkeletonTheme></Link>
+                </div>
+                <div className={s["ordinary-name__person"]}>
+                    <h5><SkeletonTheme color="#4B63D3">
+                        <Skeleton/>
+                    </SkeletonTheme></h5>
+                    <p>
+                    <SkeletonTheme color="#EDF0F3">
+                        <Skeleton/>
+                    </SkeletonTheme>
+                    </p>
+                    {/* <h5><Link to={"/kategorie/" + data.category.seo_url}>{data.category.name}</Link></h5> */}
+                    {/* <p>{data.first_name + " " + data.last_name}</p> */}
+                </div>  
+            </div>
+            <div className={s["ordinary-content"]}>
+                <SkeletonTheme color="#EDF0F3">
+                    <Skeleton height={300}/>
+                </SkeletonTheme>
+            </div>
+            <div className={s["ordinary-bottom"]}>
+                <div className={s["ordinary-bottom__date"]}>
+                    <SkeletonTheme color="#EDF0F3">
+                        <Skeleton height={30} width={80}/>
+                    </SkeletonTheme>
+                </div>
+                <div className={s["ordinary-bottom__action"]}>
+                    <button><SkeletonTheme color="#4B63D3">
+                        <Skeleton width={60}/>
+                    </SkeletonTheme></button>
+                </div>
+            </div>
+        </div>
+    );
+
+    return (
+        <>{props.post_type === "1" ? ordinaryPost() : _.times(props.loading_count, () => loadingPost())}</>
+    )
+}
+
+export default Post;

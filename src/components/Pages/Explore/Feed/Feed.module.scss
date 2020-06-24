@@ -2,18 +2,18 @@
 
 .item {
     // margin-top: 4.7rem;
-    margin-top: 2.8rem;
     border-radius: 12px;
-    // @include createShadow(0 0 10px rgba(25, 28, 31, 0.07));
     background: #fff;
     padding: 1.2rem 2.1rem;
 
     @include respond(tab-land) {
         padding: 0;
+        margin-top: 2.8rem;
     }
 
     &:first-of-type {
         margin-top: 0;
+        padding-top: 0 !important;
     }
 }
 
@@ -64,12 +64,16 @@
 
 .ordinary-content {
     margin-top: 2.4rem;
+    text-align: justify;
 
     p {
         font-size: 1.5rem;
         font-weight: 600;
         line-height: 1.6;
         color: #222;
+        white-space: pre-wrap;
+        text-indent: 4.5rem;
+        justify-self: normal;
     }
 
     button {

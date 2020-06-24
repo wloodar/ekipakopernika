@@ -60,6 +60,8 @@ class App extends Component {
               <AppRoute exact path="/onas" layout={AppLayout} component={About}/>
 
               <AppRoute exact path="/dodaj" layout={AppLayout} component={Upload}/>
+
+              <AppRoute path="/:shortid" layout={AppLayout} component={About}/>
           </Switch>
         </Router>
       </Provider>

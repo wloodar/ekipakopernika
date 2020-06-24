@@ -4,6 +4,10 @@
     @include globalWidth;
     padding-top: $main_top_padding;
 
+    @include respond(tab-port) {
+        padding-top: $main_top_padding__phone;
+    }
+
     &__header {
         margin-top: 4.1rem;
     }

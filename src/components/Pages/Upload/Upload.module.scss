@@ -49,15 +49,18 @@
     }
 
     &__toph {
-        background: url('./background.png');
-        background-size: cover;
-        background-position: bottom;
-        background-repeat: no-repeat;
+        // background: url('./background.png');
+        // background-size: cover;
+        // background-position: bottom;
+        // background-repeat: no-repeat;
+        background: var(--primary);
         text-align: center;
         border-radius: $border_radius;
 
         @include respond(tab-port) {
             border-radius: 0;
+            clip-path: polygon(0 0, 100% 0, 100% 100%, 0 90%);
+            margin-bottom: -1rem;
         }
 
         h2 {
@@ -67,8 +70,8 @@
             font-weight: 800;
             
             @include respond(tab-port) {
-                padding-top: 10.7rem;
-                padding-bottom: 9.6rem;
+                padding-top: 6.7rem;
+                padding-bottom: 8.1rem;
                 font-size: 2.7rem;
             }
         }

@@ -6,6 +6,10 @@
     display: flex;
     flex-direction: row;
     overflow: visible;
+
+    @include respond(tab-port) {
+        padding-top: $main_top_padding__phone;
+    }
 }
 
 .info {
@@ -34,7 +38,7 @@
         text-align: center;
 
         a {
-            display: inline-block;
+            display: block;
             padding: 1.9rem 0;
             font-size: 1.3rem;
             font-weight: 700;

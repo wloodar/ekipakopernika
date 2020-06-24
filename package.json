@@ -14,6 +14,7 @@
     "history": "^4.10.1",
     "jquery": "^3.5.0",
     "jwt-decode": "^2.2.0",
+    "lodash": "^4.17.15",
     "lodash.clonedeep": "^4.5.0",
     "medium-editor": "^5.23.3",
     "node-sass": "^4.13.1",
@@ -44,7 +45,10 @@
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
-    "extends": "react-app"
+    "extends": "react-app",
+    "globals": {
+      "_": true
+    }
   },
   "browserslist": {
     "production": [
