@@ -56,15 +56,14 @@
         // width: calc(100% - 10rem);
 
         h5 {
-            // font-size: 1.5rem;
             font-size: 1.8rem;
             color: var(--primary-text);
+            line-height: 98%;
         }
 
         p {
             font-size: 1.2rem;
-            font-weight: 700;
-            // color: var(--dark-gray-text);
+            font-weight: 600;
             color: darken($color: #EDF0F3, $amount: 25%);
         }
 

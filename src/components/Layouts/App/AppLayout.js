@@ -10,6 +10,7 @@ import FooterBanner from './banner2.png';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 // import './main';
 import './style.css';
+import Logo from './logo.png';
  
 class AppLayout extends Component {
 
@@ -142,7 +143,8 @@ class AppLayout extends Component {
             <>
             <nav className={s.nav}>
                 <div className={s['nav__inner']}>
-                    <h3><Link to="/">#EkipaKopernika</Link></h3>
+                    {/* <h3><Link to="/">#EkipaKopernika</Link></h3> */}
+                    <Link to="/"><img src={Logo}/></Link>
                     {this.state.width > 900 ? <div className={s['nav-list']}>
                         <ul id="mn_nav">
                             <li><NavLink exact to="/" activeClassName={[s['nav-list--active'], "mn_nav_active"].join(' ')}>Odkryj</NavLink></li>
@@ -166,7 +168,9 @@ class AppLayout extends Component {
                         <div className={cs(s["nav-responsive__fade"], s["nav-responsive__fade--right"])}></div>
                         {this.state.width <= 900 ?
                             <ul id="mn_nav" onScroll={() => this.updateUnderlinePosition(false)}>
-                                <h5><Link to="/">#EkipaKopernika</Link></h5>
+                                {/* <h5><Link to="/">#EkipaKopernika</Link></h5> */}
+                                {/* <h5><Link to="/"><img src={Logo}/></Link></h5> */}
+                                <Link to="/"><img src={Logo}/></Link>
                                 <li><NavLink exact to="/" activeClassName={[s['nav-list--active'], "mn_nav_active"].join(' ')}>Odkryj</NavLink></li>
                                 <li><NavLink to="/kategorie" activeClassName={[s['nav-list--active'], "mn_nav_active"].join(' ')}>Kategorie</NavLink></li>
                                 {/* <li><NavLink to="/wydarzenia" activeClassName={[s['nav-list--active'], "mn_nav_active"].join(' ')}>Wydarzenia</NavLink></li> */}

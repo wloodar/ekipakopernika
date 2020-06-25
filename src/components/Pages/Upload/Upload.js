@@ -32,6 +32,9 @@ class Upload extends Component {
             post_content: "",
             files: [],
             errors: {},
+            uploading: false,
+            uploading_progress: 0,
+            uploaded_shortid: "",
             success: false,
             success_graphic_number: Math.floor(Math.random() * (4 - 1)) + 1
         };
@@ -89,11 +92,6 @@ class Upload extends Component {
     validateForm(choosed_category) {
         const { first_name, last_name, user_class, post_content } = this.state; 
         let errors = {};
-        
-        // if (!first_name.trim().length > 0) {
-        //     console.log('eeeee');
-        // }
-
     }
 
     submitPost = async (e) => {
@@ -112,21 +110,24 @@ class Upload extends Component {
             formData.append("category_id", choosedCategory[0].id);
             formData.append("post_content", post_content);
             
-            axios.post(`${process.env.REACT_APP_GLOBAL_API_URL}/posts/create`, formData, {headers: { 'Content-Type': 'multipart/form-data' }}).then(result => {
-                console.log(result);
-                
-                this.setState({ success: true });
+            $("html, body").animate({ scrollTop: 0 }, 500);
+            axios.post(`${process.env.REACT_APP_GLOBAL_API_URL}/posts/create`, formData, {headers: { 'Content-Type': 'multipart/form-data' }, onUploadProgress: (progressEvent) => {
+                let percentCompleted = Math.round((progressEvent.loaded * 100) / progressEvent.total);
+                this.setState({ uploading: true, uploading_progress: percentCompleted });
+            }}).then(result => {
+                console.log(result);  
+                this.setState({ success: true, uploading: false, uploaded_shortid: result.data.post_id });
                 $("html, body").animate({ scrollTop: 0 }, "slow");
             });
         }
     }
 
     render() {
-        const { categories, loading_categories, success, success_graphic_number } = this.state;
+        const { categories, loading_categories, uploading, success, success_graphic_number } = this.state;
 
         return (
             <div className={s.wrap}>
-                {success ? <div className={s.success}>
+                {uploading === false && success ? <div className={s.success}>
                     <div className={s.success__graphic}>
                         {success_graphic_number === 1 ? <img src={cheer1}/> : null}
                         {success_graphic_number === 2 ? <img src={cheer2}/> : null}
@@ -138,10 +139,44 @@ class Upload extends Component {
                     <div className={s.success__text}>
                         <p>Twoja twórczość została właśnie przesłana do naszego zespołu Ekipy Kopernika! Jeżeli wszystko będzie się zgadzało, to twoje cudo za niedługo pojawi się na stronie.</p>
                     </div>
-                    <div className={s.success__action}>
-                        <Link to="/" className="bs-btn bs-btn--primary">Odkryj inne posty</Link>
+                    <div className={s.success__post}>
+                        <h6>Twój post znajduje się pod tym adresem.</h6>
+                        <p>{"http://ekipakopernika.pl/" + this.state.uploaded_shortid}</p>
                     </div>
-                </div> : <main className={s.main}>
+                    <div className={s.success__action}>
+                        <Link to="/" className="bs-btn bs-btn--primary">Odkryj posty</Link>
+                    </div>
+                </div> : null}
+
+                {uploading ? <div className={s.uploading}>
+                    <div className={s.uploading__box}>
+                        <div className={s.uploading__text}>
+                            {this.state.uploading_progress <= 50 ? <p>Twój post wędruje na serwer ...</p> : null}
+                            {this.state.uploading_progress > 50 && this.state.uploading_progress <= 90 ? <p>Już coraz bliżej ...</p> : null}
+                            {this.state.uploading_progress > 90 ? <p>Ostatnie formalności ...</p> : null}
+                        </div>
+                        <div className={s.uploading__indicator}>
+                            <div className={s["uploading__indicator--bar"]} style={{ "width": this.state.uploading_progress + "%" }}></div>
+                        </div>
+                    </div>
+                    <div className={cs(s.uploading__blob, s["uploading__blob--topcenter"])}>
+                        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                            <path fill="#4B63D3" d="M46.5,-76.8C60,-72.6,70.7,-59.8,77.9,-45.6C85,-31.3,88.6,-15.7,89.3,0.4C90,16.5,87.8,33,78.4,43.2C68.9,53.3,52.1,57.2,37.8,62.8C23.5,68.5,11.8,75.8,-2,79.3C-15.7,82.7,-31.4,82.1,-42.4,74.6C-53.3,67,-59.6,52.5,-66.4,38.9C-73.2,25.3,-80.6,12.7,-79.8,0.4C-79.1,-11.8,-70.3,-23.7,-62.6,-35.7C-54.9,-47.7,-48.3,-60,-38,-66C-27.8,-72,-13.9,-71.9,1.3,-74.1C16.4,-76.3,32.9,-80.9,46.5,-76.8Z" transform="translate(100 100)" />
+                        </svg>
+                    </div>
+                    <div className={cs(s.uploading__blob, s["uploading__blob--rightdown"])}>
+                        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                            <path fill="#4B63D3" d="M48.8,-60.4C61.4,-47.6,68.5,-30.5,71.7,-12.6C75,5.3,74.3,23.9,66,37.8C57.6,51.8,41.6,61.1,24.8,66.4C8,71.8,-9.6,73.3,-27.7,69.6C-45.8,65.9,-64.4,56.9,-75.3,41.7C-86.2,26.5,-89.5,5.1,-81.9,-10.3C-74.3,-25.7,-55.8,-35,-40.3,-47.4C-24.8,-59.8,-12.4,-75.1,2.8,-78.5C18.1,-81.9,36.2,-73.3,48.8,-60.4Z" transform="translate(100 100)" />
+                        </svg>
+                    </div>
+                    <div className={cs(s.uploading__blob, s["uploading__blob--leftdown"])}>
+                        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                            <path fill="#4B63D3" d="M44.1,-63C57.6,-50.8,69.3,-38.6,76.1,-23.4C82.9,-8.2,84.7,10,78.2,24C71.7,38.1,56.9,48.1,42.5,58.8C28.1,69.6,14.1,81.1,-0.7,82.1C-15.5,83.2,-31.1,73.7,-46.4,63.2C-61.7,52.7,-76.7,41.3,-79.9,27C-83.1,12.7,-74.6,-4.4,-67.6,-20.8C-60.7,-37.2,-55.3,-53,-44.3,-66C-33.3,-79,-16.6,-89.2,-0.7,-88.3C15.3,-87.3,30.6,-75.2,44.1,-63Z" transform="translate(100 100)" />
+                        </svg>
+                    </div>
+                </div> : null}
+
+                {uploading === false && success === false ? <main className={s.main}>
                     <div className={s.main__toph}>
                         <h2>Podziel się </h2>
                     </div>
@@ -238,10 +273,13 @@ class Upload extends Component {
                         </div>
                     </div>
 
-                    {this.state.post_content.trim().length > 0 && this.state.first_name.trim().length > 0 && this.state.last_name.trim().length > 0 && this.state.user_class.trim().length > 0 && this.state.categories.filter(category => category.choosed).length > 0 ? <div className={s.submit}>
+                    {/* {this.state.post_content.trim().length > 0 && this.state.first_name.trim().length > 0 && this.state.last_name.trim().length > 0 && this.state.user_class.trim().length > 0 && this.state.categories.filter(category => category.choosed).length > 0 ? <div className={s.submit}>
                         <button type="submit" className="bs-btn bs-btn--primary" onClick={this.submitPost}>Opublikuj</button>
-                    </div> : null}
-                </main> }
+                    </div> : null} */}
+                    <div className={s.submit}>
+                        <button type="submit" className="bs-btn bs-btn--primary" onClick={this.submitPost}>Opublikuj</button>
+                    </div>
+                </main> : null }
             </div>
         )
     }
