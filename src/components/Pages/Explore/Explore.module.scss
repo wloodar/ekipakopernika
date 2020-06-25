@@ -316,26 +316,61 @@
         padding-top: $main_top_padding__phone;
     }
 
+    // &__logo {
+    //     margin-bottom: 2.7rem;
+    //     text-align: center;
+
+    //     h5 {
+    //         font-size: 1.4rem;
+    //         font-weight: 600;
+    //         color: #fff;
+    //         background: var(--primary);
+    //         border-radius: 100px;
+    //         padding: .7rem 0;
+    //         margin: 0 4.2rem 2.1rem;
+
+    //         @include respond(tab-land) {
+    //             margin: 0 0 1.7rem;
+    //         }
+    //     }   
+
+    //     a {
+    //         font-size: 1.3rem;
+
+    //         &:hover {
+    //             text-decoration: underline;
+    //         }
+    //     }
+
+    //     img {
+    //         @include respond(phone) {
+    //             width: 80%;
+    //             margin-left: auto; margin-right: auto;
+    //         }
+    //     }
+    // }
+
     &__logo {
         margin-bottom: 2.7rem;
         text-align: center;
+        background: var(--primary);
+        margin: 0 4.2rem 2.1rem;
+        padding: 2.1rem 1.4rem;
+        border-radius: $border-radius;
+
+        @include respond(tab-land) {
+            margin: 0 0 2.7rem;
+        }
 
         h5 {
-            font-size: 1.4rem;
+            font-size: 1.7rem;
             font-weight: 600;
             color: #fff;
-            background: var(--primary);
-            border-radius: 100px;
-            padding: .7rem 0;
-            margin: 0 4.2rem 2.1rem;
-
-            @include respond(tab-land) {
-                margin: 0 0 1.7rem;
-            }
+            padding-bottom: .9rem;
         }   
 
         a {
-            font-size: 1.3rem;
+            font-size: 1.6rem;
 
             &:hover {
                 text-decoration: underline;
@@ -343,10 +378,12 @@
         }
 
         img {
-            @include respond(phone) {
-                width: 80%;
-                margin-left: auto; margin-right: auto;
-            }
+            width: 17rem;
+            margin-left: auto; margin-right: auto;
+            // @include respond(phone) {
+            //     width: 80%;
+            //     margin-left: auto; margin-right: auto;
+            // }
         }
     }
 }

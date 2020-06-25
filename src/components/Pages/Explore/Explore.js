@@ -7,6 +7,7 @@ import s from './Explore.module.scss';
 import Posts from './Posts/Posts';
 
 import Logo from './logo.png';
+import LogoWhite from './logo-biale.png';
 
 class Explore extends Component {
 
@@ -78,9 +79,13 @@ class Explore extends Component {
                 </aside>
                 <main className={s.feed} id="feed_explore">
                     <div className={s['feed-wrapper']}>
-                        <div className={s['feed-wrapper__logo']}>
+                        {/* <div className={s['feed-wrapper__logo']}>
                             <h5>Witaj! <Link to="/onas">{"Poznaj nas >"}</Link></h5>
                             <img src={Logo}/>
+                        </div> */}
+                        <div className={s['feed-wrapper__logo']}>
+                            <h5>Witaj! <Link to="/onas">{"Poznaj nas >"}</Link></h5>
+                            <img src={LogoWhite}/>
                         </div>
                         <Posts apiUrl="/posts/feed/fetch"/>
                     </div>

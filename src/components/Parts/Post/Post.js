@@ -7,12 +7,15 @@ import 'react-medium-image-zoom/dist/styles.css';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
 import ReadMore from '@crossfield/react-read-more';
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+import { Carousel } from 'react-responsive-carousel';
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
 import CopyToClipboard from 'react-copy-to-clipboard';
 import _ from 'lodash';
 
 import s from './Post.module.scss';
 import { post } from 'jquery';
+
 
 function Post(props) {
 
@@ -48,7 +51,7 @@ function Post(props) {
                     </p>
                 </ReadMore>
             </div>
-            <div className={cs(s["ordinary-images"], data.attachments.length === 1 ? s["ordinary-images__single"] : s["ordinary-images__multiple"])}>
+            {/* <div className={cs(s["ordinary-images"], data.attachments.length === 1 ? s["ordinary-images__single"] : s["ordinary-images__multiple"])}>
                 {data.attachments.map((val, key) => (
                     <div className={s["ordinary-images__item"]}>
                         <LazyLoadImage
@@ -57,6 +60,23 @@ function Post(props) {
                         />
                     </div>
                 ))}
+            </div> */}
+            <div className={s["ordinary-images"]}>
+                {data.attachments.length !== 0 && data.attachments.length === 1 ? <div className={cs(s["ordinary-images__item"], s["ordinary-images__item--single"])}>
+                    <LazyLoadImage
+                                src={createUrl(data.attachments[0].attachment_url,  data.attachments[0].length === 1 ? "_medium" : "_small")} // use normal <img> attributes as props
+                                effect="blur"
+                    /></div> : null}
+                {data.attachments.length !== 0 && data.attachments.length > 1 ? <Carousel showStatus={false} showThumbs={false} >
+                    {data.attachments.map((val, key) => (
+                        <div className={s["ordinary-images__item"]}>
+                            <LazyLoadImage
+                                src={createUrl(val.attachment_url,  data.attachments.length === 1 ? "_medium" : "_small")} // use normal <img> attributes as props
+                                effect="blur"
+                            />
+                        </div>
+                    ))}
+                </Carousel> : null}
             </div>
             {/* <div className={s["ordinary-bottom"]}>
                 <div className={s["ordinary-bottom__date"]}>

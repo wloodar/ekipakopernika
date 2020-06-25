@@ -110,47 +110,83 @@
     }
 }
 
+// .ordinary-images {
+//     margin-top: 1.9rem;
+
+//     &__single {
+
+//         img {
+//             border-radius: 7px;
+//             object-fit: cover;
+//         }
+
+//         span {
+//             width: 100%;
+//         }
+//     }
+
+//     &__multiple {
+//         line-height: 0;
+   
+//         -webkit-column-count: 2;
+//         -webkit-column-gap:   4px;
+//         -moz-column-count:    2;
+//         -moz-column-gap:      4px;
+//         column-count:         2;
+//         column-gap:           4px;
+
+//         border-radius: 7px;
+//         overflow: auto;
+        
+//     }
+
+//     &__item {
+//         height: 100%;
+//     }
+    
+//     img{
+//         width: 100% !important;
+//         height: auto;
+//         object-fit: cover;
+//         margin-bottom: 4px;
+//     }
+
+// }
+
+
 .ordinary-images {
     margin-top: 1.9rem;
+    // border-radius: $border_radius;
+    // overflow: hidden;
 
-    &__single {
-
-        img {
-            border-radius: 7px;
-            object-fit: cover;
-        }
-
-        span {
-            width: 100%;
-        }
+    span {
+        display: block;
+        width: 100%;
     }
 
-    &__multiple {
-        line-height: 0;
-   
-        -webkit-column-count: 2;
-        -webkit-column-gap:   4px;
-        -moz-column-count:    2;
-        -moz-column-gap:      4px;
-        column-count:         2;
-        column-gap:           4px;
+    & > div {
+        border-radius: $border_radius !important;
+        -webkit-border-radius: $border_radius !important;
+        -moz-border-radius: $border_radius !important;
+        overflow: hidden !important;
+        perspective: $border_radius !important; 
+    }
 
-        border-radius: 7px;
-        overflow: auto;
-        
+    ul:first-child {
+        li {
+            background: transparent !important;
+        }
     }
 
     &__item {
-        height: 100%;
-    }
-    
-    img{
-        width: 100% !important;
-        height: auto;
-        object-fit: cover;
-        margin-bottom: 4px;
-    }
 
+        &--single {
+            span {
+                border-radius: $border_radius;
+                overflow: hidden;
+            }
+        }
+    }
 }
 
 .ordinary-bottom {

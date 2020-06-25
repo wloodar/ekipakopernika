@@ -144,7 +144,7 @@ class AppLayout extends Component {
             <nav className={s.nav}>
                 <div className={s['nav__inner']}>
                     {/* <h3><Link to="/">#EkipaKopernika</Link></h3> */}
-                    <Link to="/"><img src={Logo}/></Link>
+                    <Link to="/"><img src={Logo} onLoad={() => this.updateUnderlinePosition(false)} /></Link>
                     {this.state.width > 900 ? <div className={s['nav-list']}>
                         <ul id="mn_nav">
                             <li><NavLink exact to="/" activeClassName={[s['nav-list--active'], "mn_nav_active"].join(' ')}>Odkryj</NavLink></li>
