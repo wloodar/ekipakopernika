@@ -273,12 +273,9 @@ class Upload extends Component {
                         </div>
                     </div>
 
-                    {/* {this.state.post_content.trim().length > 0 && this.state.first_name.trim().length > 0 && this.state.last_name.trim().length > 0 && this.state.user_class.trim().length > 0 && this.state.categories.filter(category => category.choosed).length > 0 ? <div className={s.submit}>
+                    {this.state.post_content.trim().length > 0 && this.state.first_name.trim().length > 0 && this.state.last_name.trim().length > 0 && this.state.user_class.trim().length > 0 && this.state.categories.filter(category => category.choosed).length > 0 ? <div className={s.submit}>
                         <button type="submit" className="bs-btn bs-btn--primary" onClick={this.submitPost}>Opublikuj</button>
-                    </div> : null} */}
-                    <div className={s.submit}>
-                        <button type="submit" className="bs-btn bs-btn--primary" onClick={this.submitPost}>Opublikuj</button>
-                    </div>
+                    </div> : null}
                 </main> : null }
             </div>
         )
