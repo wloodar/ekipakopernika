@@ -137,7 +137,7 @@ class Upload extends Component {
                         <h3>Znakomicie!</h3>
                     </div>
                     <div className={s.success__text}>
-                        <p>Twoja twórczość została właśnie przesłana do naszego zespołu Ekipy Kopernika! Jeżeli wszystko będzie się zgadzało, to twoje cudo za niedługo pojawi się na stronie.</p>
+                        <p>Twoja twórczość została właśnie przesłana do naszego zespołu Ekipy Kopernika! Jeżeli wszystko będzie się zgadzało, to twoje cudo niedługo pojawi się na stronie.</p>
                     </div>
                     <div className={s.success__post}>
                         <h6>Twój post znajduje się pod tym adresem.</h6>
