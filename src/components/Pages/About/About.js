@@ -3,6 +3,8 @@ import { withRouter, Link } from 'react-router-dom';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
 import ReadMore from '@crossfield/react-read-more';
+import { createUrl } from '../../../functions/ImageUrl';
+import axios from 'axios';
 import $ from 'jquery';
 import s from './About.module.scss';
 
@@ -11,28 +13,33 @@ class About extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            people: [
-                {
-                    id: 1,
-                    name: "Dominika Tomkowicz",
-                    description: "Od zawsze lubiłam książki. Już jako mała dziewczynka byłamciekawa, co kryje się pod ich grubymi okładkami. Teraz sięgam po literackie wkażdej wolnej chwili. Są dla mnie lekarstwem na wszystko, dzięki nim się relaksuję, a pocudownym relaksie najlepsze jest dobre jedzenie. Często wcielam się w rolę kucharza ipróbuję stworzyć małe arcydzieła, daje mi to niesamowitą satysfakcję. Staram się teżpamiętać o regularnym uprawianiu sportu, choć mój ulubiony jest dość nietypowy. Odszóstej klasy szkoły podstawowej gram w szachy. Potrafię się wtedy skupić i zmusić mojeszare komórki do wytężonej pracy."
-                },
-                {
-                    id: 2,
-                    name: "Filadelfia Grabowska",
-                    description: "Od dawna pasjonuję się fotografią, co sprawiło, że razem zchłopakiem stworzyliśmy firmę Xartus Pictures, zajmującą się robieniem zdjęć oraz filmówz różnego rodzaju wydarzeń oraz uroczystości. W wolnym czasie uwielbiam aktywnośćfizyczną, na przykład jazdę na rowerze i lekkoatletykę. Dawniej należałam do klubuNadwiślanin Chełmno i miałam na swym koncie wiele osiągnięć sportowych, m.in. brałamudział w mistrzostwach Polski. Jestem miłośniczką podróży. Przed pandemią, w prawiekażdy wolny weekend, odwiedzałam różne, ciekawe miejsca."
-                },
-                {
-                    id: 3,
-                    name: "Tomasz Gajewski",
-                    description: "Bardzo lubię gotować, a także piec ciasta. Interesuję się równieżogrodnictwem, mam sporo roślin w domu, bo nie posiadam ogrodu. Interesuje mnierównież moda, lubię patrzeć na różne wybitne prace wielu projektantów. Lubię takżerysować, lecz dopiero się uczę i moje prace nie są wybitne."
-                }
-            ]
+            // people: [
+            //     {
+            //         id: 1,
+            //         name: "Dominika Tomkowicz",
+            //         description: "Od zawsze lubiłam książki. Już jako mała dziewczynka byłamciekawa, co kryje się pod ich grubymi okładkami. Teraz sięgam po literackie wkażdej wolnej chwili. Są dla mnie lekarstwem na wszystko, dzięki nim się relaksuję, a pocudownym relaksie najlepsze jest dobre jedzenie. Często wcielam się w rolę kucharza ipróbuję stworzyć małe arcydzieła, daje mi to niesamowitą satysfakcję. Staram się teżpamiętać o regularnym uprawianiu sportu, choć mój ulubiony jest dość nietypowy. Odszóstej klasy szkoły podstawowej gram w szachy. Potrafię się wtedy skupić i zmusić mojeszare komórki do wytężonej pracy."
+            //     },
+            //     {
+            //         id: 2,
+            //         name: "Filadelfia Grabowska",
+            //         description: "Od dawna pasjonuję się fotografią, co sprawiło, że razem zchłopakiem stworzyliśmy firmę Xartus Pictures, zajmującą się robieniem zdjęć oraz filmówz różnego rodzaju wydarzeń oraz uroczystości. W wolnym czasie uwielbiam aktywnośćfizyczną, na przykład jazdę na rowerze i lekkoatletykę. Dawniej należałam do klubuNadwiślanin Chełmno i miałam na swym koncie wiele osiągnięć sportowych, m.in. brałamudział w mistrzostwach Polski. Jestem miłośniczką podróży. Przed pandemią, w prawiekażdy wolny weekend, odwiedzałam różne, ciekawe miejsca."
+            //     },
+            //     {
+            //         id: 3,
+            //         name: "Tomasz Gajewski",
+            //         description: "Bardzo lubię gotować, a także piec ciasta. Interesuję się równieżogrodnictwem, mam sporo roślin w domu, bo nie posiadam ogrodu. Interesuje mnierównież moda, lubię patrzeć na różne wybitne prace wielu projektantów. Lubię takżerysować, lecz dopiero się uczę i moje prace nie są wybitne."
+            //     }
+            // ]
+            people: []
         };
     }
 
     componentDidMount() {
-        
+        axios.get(`${process.env.REACT_APP_GLOBAL_API_URL}/about/all`).then(result => {
+            if (result.data.status === 1) {
+                this.setState({ people: result.data.people });   
+            }
+        })
     }
 
     render() {
@@ -57,7 +64,7 @@ class About extends Component {
                             {people.map((val, key) => <div key={key} className={s.person}>
                                 <div className={s.person__image}>
                                 <LazyLoadImage
-                                src={process.env.REACT_APP_GLOBAL_UPLOAD_URL + "/people/" + val.name + ".jpg"} // use normal <img> attributes as props
+                                src={createUrl(val.image, "_medium")} // use normal <img> attributes as props
                                 effect="blur"
                             />
                             </div>

@@ -67,7 +67,7 @@ function Post(props) {
                                 src={createUrl(data.attachments[0].attachment_url,  data.attachments[0].length === 1 ? "_medium" : "_small")} // use normal <img> attributes as props
                                 effect="blur"
                     /></div> : null}
-                {data.attachments.length !== 0 && data.attachments.length > 1 ? <Carousel showStatus={false} showThumbs={false} >
+                {data.attachments.length !== 0 && data.attachments.length > 1 ? <Carousel showStatus={false} showThumbs={false} dynamicHeight={true} >
                     {data.attachments.map((val, key) => (
                         <div className={s["ordinary-images__item"]}>
                             <LazyLoadImage
