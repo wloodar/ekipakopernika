@@ -10,7 +10,7 @@ import ScrollToTop from './functions/ScrollToTop';
 import './sass/App.scss';
 
 import { AppLayout, UploadLayout } from './components/Layouts';
-import { Explore, Categories, CategoriesDetails, Events, EventDetails, About, Upload } from './components/Pages';
+import { Explore, ExactPost, Categories, CategoriesDetails, Events, EventDetails, About, Upload } from './components/Pages';
 
 const AppRoute = ({ component: Component, layout: Layout, ...rest }) => (
   <ScrollToTop>
@@ -61,7 +61,7 @@ class App extends Component {
 
               <AppRoute exact path="/dodaj" layout={AppLayout} component={Upload}/>
 
-              <AppRoute path="/:shortid" layout={AppLayout} component={About}/>
+              <AppRoute path="/:shortid" layout={AppLayout} component={ExactPost}/>
           </Switch>
         </Router>
       </Provider>
