@@ -28,9 +28,9 @@ class ExactPost extends Component {
         
         return (
             <>
-            { Object.keys(post).length !== 0 ? <Helmet>
+            {/* { Object.keys(post).length !== 0 ? <Helmet>
                 <title>Post {post.first_name + " " + post.last_name} w kategorii {post.category.name}</title>
-            </Helmet> : null }
+            </Helmet> : null } */}
             </>
         )
     }
