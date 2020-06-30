@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { withRouter, Link } from 'react-router-dom';
 import axios from 'axios';
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
+import $ from 'jquery';
 import { createUrl } from '../../../../functions/ImageUrl';
 import Feed from '../../Explore/Feed/Feed';
 import Posts from '../../Explore/Posts/Posts';
@@ -24,6 +25,7 @@ class CategoriesDetails extends Component {
 
     componentDidUpdate(prevProps, prevState) {   
         if (this.props.match.params.name !== this.state.category_url){
+            $('#categories_other_list').animate({scrollLeft: 0}, 500);
             this.state.categories.forEach(el => {
                 if (this.props.match.params.name === el.seo_url) {
                     this.setState({ category_url: this.props.match.params.name, category_name: el.name });
@@ -78,52 +80,38 @@ class CategoriesDetails extends Component {
                         </div> : null) )}
                         <div className={s.info__others}>
                             <h4 className="bs-header">Inne kategorie</h4>
-                            {categories.length === 1 ? [0,0,0,0].map((val, key) => (
-                                <div className={s['categories-item']}>
+                            <div className={s.info__categories} id="categories_other_list">
+                                {categories.length === 1 ? [0,0,0,0].map((val, key) => (
+                                    <div className={s['categories-item']}>
+                                        <div className={s['categories-item__inner']}>
+                                            <div className={s['categories-item__image']}>
+                                                <SkeletonTheme color="#EDF0F3">
+                                                    <Skeleton/>
+                                                </SkeletonTheme>
+                                            </div>    
+                                            <div className={s['categories-item__info']}>
+                                                <h5><SkeletonTheme color="#EDF0F3"><Skeleton/></SkeletonTheme></h5>
+                                                <p><SkeletonTheme color="#EDF0F3"><Skeleton/></SkeletonTheme></p>
+                                            </div>
+                                        </div>    
+                                    </div>
+                                )) : categories.slice(0,5).map((obj, key) => obj.seo_url === this.props.match.params.name ? null : <div className={s['categories-item']}>
+                                    <Link to={`/kategorie/${obj.seo_url}`}></Link>
                                     <div className={s['categories-item__inner']}>
                                         <div className={s['categories-item__image']}>
-                                            <SkeletonTheme color="#EDF0F3">
-                                                <Skeleton/>
-                                            </SkeletonTheme>
+                                            <img src={createUrl(obj.cover_pic, "_small")}/>
                                         </div>    
                                         <div className={s['categories-item__info']}>
-                                            <h5><SkeletonTheme color="#EDF0F3"><Skeleton/></SkeletonTheme></h5>
-                                            <p><SkeletonTheme color="#EDF0F3"><Skeleton/></SkeletonTheme></p>
+                                            <h5>{obj.name}</h5>
+                                            <p>{obj.total_posts === undefined ? <Skeleton width={30}/> : obj.total_posts == 0 ? "0 postów" : obj.total_posts + " " + (obj.total_posts < 5 ? obj.total_posts == 1 ? "Post" : "Posty" : "Postów")}</p>
                                         </div>
-                                    </div>    
-                                </div>
-                            )) : categories.slice(0,5).map((obj, key) => obj.seo_url === this.props.match.params.name ? null : <div className={s['categories-item']}>
-                                <Link to={`/kategorie/${obj.seo_url}`}></Link>
-                                <div className={s['categories-item__inner']}>
-                                    <div className={s['categories-item__image']}>
-                                        <img src={createUrl(obj.cover_pic, "_small")}/>
-                                    </div>    
-                                    <div className={s['categories-item__info']}>
-                                        <h5>{obj.name}</h5>
-                                        <p>{obj.total_posts === undefined ? <Skeleton width={30}/> : obj.total_posts == 0 ? "0 postów" : obj.total_posts + " " + (obj.total_posts < 5 ? obj.total_posts == 1 ? "Post" : "Posty" : "Postów")}</p>
-                                    </div>
-                                </div>     
-                            </div>)}
+                                    </div>     
+                                </div>)}
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div className={s.feed}>
-                    <div className={s["feed-header"]}>
-                        <div className={s["feed-header__category"]}>
-                            <div className={s["feed-header__image"]}>
-                                {this.state.category.image === undefined ? <Skeleton height={70}/> : <img src={createUrl(this.state.category.image, "_small")}/>}
-                            </div>
-                            <div className={s["feed-header__info"]}>
-                                <SkeletonTheme highlightColor="#4B63D3">
-                                    <p>{this.state.category.name || <Skeleton/>}</p>
-                                </SkeletonTheme>
-                                <span>{this.state.category.total_posts === undefined ? <Skeleton width={30}/> : this.state.category.total_posts == 0 ? "Brak postów" : this.state.category.total_posts + " " + (this.state.category.total_posts < 5 ? this.state.category.total_posts == 1 ? "Post" : "Posty" : "Postów")}</span>
-                            </div>
-                        </div>
-                        <div className={s["feed-header__back"]}>
-                            <Link to="/kategorie">Wszystkie kategorie</Link>
-                        </div>
-                    </div>
                     {this.state.category.total_posts > 0 ? <div className={s.feed__title}>
                         <h4 className="bs-header">Posty w kategorii</h4>
                     </div> : null} 

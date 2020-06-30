@@ -18,11 +18,13 @@ class AppLayout extends Component {
         super(props);
         this.state = {
             width: 0, 
-            height: 0
+            height: 0,
+            scrollingTimeout: 0
         };
 
         this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
         this.changeUnderlinePosition = this.changeUnderlinePosition.bind();
+        this.responsiveMenuScrolled = this.responsiveMenuScrolled.bind(this);
     }
 
     componentDidMount() {
@@ -60,9 +62,6 @@ class AppLayout extends Component {
             
             const marginLeft = Math.round(widthOfElement * $('.mn_nav_active').parent().index());
             if ($('.mn_nav_active').parent().index() !== -1) {
-                // sliding_border.style.marginLeft = marginLeft + '%';  
-
-                // sliding_border.style.width =  widthOfElement + '%';
                 sliding_border.style.opacity = "1";
                 sliding_border.style.marginLeft =  $('.mn_nav_active').parent().position().left + "px";
                 sliding_border.style.width =  $('.mn_nav_active').parent().width() + "px";
@@ -133,8 +132,20 @@ class AppLayout extends Component {
 
     }
 
-    animateTransition = (el) => {
-       
+    responsiveMenuScrolled = (e) => {
+        e.preventDefault();
+        const self = this;        
+
+        if (self.state.scrollingTimeout) {
+            clearTimeout(self.state.scrollingTimeout);
+        }
+
+        self.setState({
+            scrollingTimeout: setTimeout(function () {                
+                $('#mn_nav').animate({scrollLeft: $('.mn_nav_active').offset().left}, 700);
+            }, 1000)
+        });
+        this.updateUnderlinePosition(false);
     }
 
     render() {
@@ -167,7 +178,7 @@ class AppLayout extends Component {
                         <div className={cs(s["nav-responsive__fade"], s["nav-responsive__fade--left"])}></div>
                         <div className={cs(s["nav-responsive__fade"], s["nav-responsive__fade--right"])}></div>
                         {this.state.width <= 900 ?
-                            <ul id="mn_nav" onScroll={() => this.updateUnderlinePosition(false)}>
+                            <ul id="mn_nav" onScroll={(e) => this.responsiveMenuScrolled(e)}>
                                 {/* <h5><Link to="/">#EkipaKopernika</Link></h5> */}
                                 {/* <h5><Link to="/"><img src={Logo}/></Link></h5> */}
                                 <Link to="/"><img src={Logo}/></Link>
