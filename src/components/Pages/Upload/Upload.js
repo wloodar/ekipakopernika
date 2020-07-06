@@ -253,7 +253,8 @@ class Upload extends Component {
                             <div className={cs(s.attachments, s.content__box)}>
                                 <div className={s.main__header}>
                                     <h4>Treść</h4>
-                                    <button>Zasady dodawania treści</button>
+                                    <span>Zgodnie z zasadami</span>
+                                    {/* <button>Zasady dodawania treści</button> */}
                                 </div>
                                 <div className={s.attachments__content}>
                                     <Post parentCallback={this.callbackFunction}/>
@@ -264,7 +265,7 @@ class Upload extends Component {
                             <div className={s.attachments}>
                                 <div className={s.main__header}>
                                     <h4>Załączniki</h4>
-                                    <span>(.jpg, .jpeg, .png)</span>
+                                    <span>(.jpg, .jpeg, .png) - 10mb</span>
                                 </div>
                                 <div className={s.attachments__content}>
                                     <UploadView parentFiles={this.callbackFiles} parentRemoveFile={this.removeFile} header={<div className={s.main__header}><h4>Dodane pliki</h4></div>} />
@@ -273,8 +274,9 @@ class Upload extends Component {
                         </div>
                     </div>
 
-                    {this.state.post_content.trim().length > 0 && this.state.first_name.trim().length > 0 && this.state.last_name.trim().length > 0 && this.state.user_class.trim().length > 0 && this.state.categories.filter(category => category.choosed).length > 0 ? <div className={s.submit}>
+                    {this.state.post_content.trim().length > 0 && this.state.post_content.length <= 2000 && this.state.first_name.trim().length > 0 && this.state.last_name.trim().length > 0 && this.state.user_class.trim().length > 0 && this.state.categories.filter(category => category.choosed).length > 0 ? <div className={s.submit}>
                         <button type="submit" className="bs-btn bs-btn--primary" onClick={this.submitPost}>Opublikuj</button>
+                        <p>Publikując, oświadczam, że jestem autorem tekstu oraz załączonego materiału/materiałów.</p>
                     </div> : null}
                 </main> : null }
             </div>

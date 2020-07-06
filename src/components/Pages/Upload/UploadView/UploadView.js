@@ -61,7 +61,7 @@ class UploadView extends Component {
                 {({getRootProps, getInputProps}) => (
                     <div {...getRootProps()} className={s.drop}>
                         <input {...getInputProps()} />
-                        <p>Przeciągnij tutaj pliki lub kliknij żeby wybrać.</p>
+                        <p>Przeciągnij tutaj pliki lub kliknij, żeby wybrać.</p>
                     </div>
                 )}
                 </Dropzone>

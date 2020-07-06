@@ -6,6 +6,7 @@ import $ from 'jquery';
 import { createUrl } from '../../../../functions/ImageUrl';
 import Feed from '../../Explore/Feed/Feed';
 import Posts from '../../Explore/Posts/Posts';
+import NotFound from '../../../Parts/NotFound/NotFound';
 import s from './CategoriesDetails.module.scss';
 
 class CategoriesDetails extends Component {
@@ -16,6 +17,7 @@ class CategoriesDetails extends Component {
             posts: [],
             categories: [],
             category: {},
+            loading_category: true,
             category_url: "",
             category_name: ""
         };
@@ -28,7 +30,7 @@ class CategoriesDetails extends Component {
             $('#categories_other_list').animate({scrollLeft: 0}, 500);
             this.state.categories.forEach(el => {
                 if (this.props.match.params.name === el.seo_url) {
-                    this.setState({ category_url: this.props.match.params.name, category_name: el.name });
+                    this.setState({ category_url: this.props.match.params.name, category_name: el.name, loading_category: false });
                     this.fetchCurrentCategory();
                 }
             }); 
@@ -42,7 +44,7 @@ class CategoriesDetails extends Component {
             if (res.data.status === 1) {
                 res.data.categories.forEach(el => {
                     if (this.props.match.params.name === el.seo_url) {
-                        this.setState({ categories: shuffle(res.data.categories), category_url: this.props.match.params.name, category_name: el.name });
+                        this.setState({ categories: shuffle(res.data.categories), category_url: this.props.match.params.name, category_name: el.name, loading_category: false });
 
                         function shuffle(a) {
                             for (let i = a.length - 1; i > 0; i--) {
@@ -51,6 +53,8 @@ class CategoriesDetails extends Component {
                             }
                             return a;
                         }
+                    } else {
+                        this.setState({ loading_category: false });
                     }
                 });
             }
@@ -67,6 +71,8 @@ class CategoriesDetails extends Component {
     render() {
         const { categories, category_name } = this.state;
         return (
+            <>
+            {this.state.loading_category === false && category_name === "" ? <NotFound/> : 
             <div className={s.wrapper}>
                 <div className={s.info}>
                     <div className={s.info__inner}>
@@ -112,12 +118,12 @@ class CategoriesDetails extends Component {
                     </div>
                 </div>
                 <div className={s.feed}>
-                    {this.state.category.total_posts > 0 ? <div className={s.feed__title}>
+                    {this.state.loading_category === false && this.state.category_name !== "" && this.state.category.total_posts > 0 ? <div className={s.feed__title}>
                         <h4 className="bs-header">Posty w kategorii</h4>
                     </div> : null} 
-                    <div className={s.feed__inner}>
+                    {this.state.loading_category === false && this.state.category_name !== "" ? <div className={s.feed__inner}>
                         {this.state.category.id !== undefined ? <Posts apiUrl={`/posts/category/posts/${this.state.category.id}`}/> : null}
-                    </div>
+                    </div> : null} 
                 </div>
                 <div className={s.share}>
                     <div className={s.share__inner}>
@@ -134,7 +140,8 @@ class CategoriesDetails extends Component {
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> }
+            </>
         )
     }
 }

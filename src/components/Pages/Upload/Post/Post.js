@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { withRouter, Link } from 'react-router-dom';
+import cs from 'classnames';
 import s from './Post.module.scss';
 
 class Post extends Component {
@@ -30,14 +31,17 @@ class Post extends Component {
     render() {
         return (
             <div className={s.form}>
-                <div className={s.form__textarea}>
+                <div className={cs(s.form__textarea, this.state.post_content.length > 2000 ? s["form__textarea--limit"] : null)}>
                     <textarea 
                         name="post_content"
-                        placeholder="Twoje piękna historia ..."
+                        placeholder="Twoja piękna historia ..."
                         rows="1"
                         value={this.state.post_content}
                         onChange={this.handleInputChange}
                 ></textarea>
+                </div>
+                <div className={cs(s.form__counter, this.state.post_content.length > 2000 ? s["form__counter--visible"] : null)}>
+                    <p><span>Limit przekroczony - </span> {this.state.post_content.length} / 2000</p>
                 </div>
             </div>
         )

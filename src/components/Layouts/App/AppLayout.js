@@ -142,10 +142,10 @@ class AppLayout extends Component {
 
         self.setState({
             scrollingTimeout: setTimeout(function () {                
-                $('#mn_nav').animate({scrollLeft: $('.mn_nav_active').offset().left}, 700);
+                // $('#mn_nav').animate({scrollLeft: $('.mn_nav_active').offset().left}, 700);
             }, 1000)
         });
-        this.updateUnderlinePosition(false);
+        // this.updateUnderlinePosition(false);
     }
 
     render() {
@@ -178,7 +178,7 @@ class AppLayout extends Component {
                         <div className={cs(s["nav-responsive__fade"], s["nav-responsive__fade--left"])}></div>
                         <div className={cs(s["nav-responsive__fade"], s["nav-responsive__fade--right"])}></div>
                         {this.state.width <= 900 ?
-                            <ul id="mn_nav" onScroll={(e) => this.responsiveMenuScrolled(e)}>
+                            <ul id="mn_nav" onScroll={(e) => this.updateUnderlinePosition(false)}>
                                 {/* <h5><Link to="/">#EkipaKopernika</Link></h5> */}
                                 {/* <h5><Link to="/"><img src={Logo}/></Link></h5> */}
                                 <Link to="/"><img src={Logo}/></Link>
@@ -205,6 +205,9 @@ class AppLayout extends Component {
             </div>
             <footer className={s.footer}>
                 <div className={s['footer__inner']}>
+                    <div className={s['footer__quotation']}>
+                        <p>Dawna i nowoczesna kultura okiem #EkipyKopernika”</p>
+                    </div>
                     <div className={s['footer__banner']}>
                         <img src={FooterBanner}/>
                     </div>

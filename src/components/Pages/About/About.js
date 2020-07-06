@@ -49,7 +49,7 @@ class About extends Component {
                 <div className={s.header} id="about-header">
                     <div className={s.header__box}>
                         {/* <h5>O nas</h5> */}
-                        <p>Strona Ekipy Kopernika prezentuje efekty pracy młodych ludzi, którzy chcą się podzielić z innymi pasjami, zainteresowaniami oraz pokazać związek między dawną i współczesną kulturą. Naszym celem jest zachęcenie społeczności Zespołu Szkół Ogólnokształcących nr 1  w Chełmnie do dzielenia się swoimi doświadczeniami, do prezentowania całemu światu efektów własnej twórczości oraz do pokazywania tego, co "tam komu w duszy gra, co kto w swoich widzi snach".</p>
+                        <p>Strona Ekipy Kopernika prezentuje efekty pracy młodych ludzi, którzy chcą się podzielić z innymi pasjami, zainteresowaniami oraz pokazać związek między dawną i współczesną kulturą. Naszym celem jest zachęcenie społeczności Zespołu Szkół Ogólnokształcących nr 1 <br/>w Chełmnie do dzielenia się swoimi doświadczeniami, do prezentowania całemu światu efektów własnej twórczości oraz do pokazywania tego, co "tam komu w duszy gra, co kto w swoich widzi snach".</p>
                     </div>
                     <div className={s.header__more} onClick={() => {$("html, body").animate({ scrollTop: $("#about-header").offset().top + $("#about-header").height() - 100 + "px" }, 1000)}}>
                         <p>Poznaj nas</p>

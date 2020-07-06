@@ -1,0 +1,17 @@
+@import '../../../sass/config.scss';
+
+.box {
+    margin-top: calc(#{$main_top_padding} + 15vh); margin-bottom: 15vh;
+    text-align: center;
+
+    p {
+        padding-top: 1.2rem;
+        font-weight: 500;
+    }
+
+    a {
+        color: var(--primary);
+        display: inline-block;
+        font-weight: 600;
+    }
+}

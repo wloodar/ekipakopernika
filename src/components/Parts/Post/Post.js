@@ -108,42 +108,41 @@ function Post(props) {
 
     const loadingPost = () => (
         <div className={s.item}>
-            <div className={s["ordinary-name"]}>
-                <div className={s["ordinary-name__icon"]}>
-                    <Link><SkeletonTheme color="#EDF0F3">
-                        <Skeleton height={300}/>
-                    </SkeletonTheme></Link>
+            <div className={s["ordinary-name"]}>                
+                <div className={s["ordinary-name__info"]}>
+                    <div className={s["ordinary-name__icon"]}>
+                        <Link><SkeletonTheme color="#EDF0F3">
+                            <Skeleton height={300}/>
+                        </SkeletonTheme></Link>
+                    </div>
+                    <div className={s["ordinary-name__person"]}>
+                        <h5 style={{ paddingBottom: "5px", paddingTop: "5px" }}><SkeletonTheme color="#4B63D3">
+                            <Skeleton height={20} width={100}/>
+                        </SkeletonTheme></h5>
+                        <p>
+                        <SkeletonTheme color="#EDF0F3">
+                            <Skeleton/>
+                        </SkeletonTheme>
+                        </p>
+                    </div>  
                 </div>
-                <div className={s["ordinary-name__person"]}>
-                    <h5><SkeletonTheme color="#4B63D3">
-                        <Skeleton/>
-                    </SkeletonTheme></h5>
+                <div className={s["ordinary-name__date"]}>
                     <p>
                     <SkeletonTheme color="#EDF0F3">
-                        <Skeleton/>
+                        <Skeleton width={50}/>
                     </SkeletonTheme>
                     </p>
-                    {/* <h5><Link to={"/kategorie/" + data.category.seo_url}>{data.category.name}</Link></h5> */}
-                    {/* <p>{data.first_name + " " + data.last_name}</p> */}
-                </div>  
+                </div>
             </div>
             <div className={s["ordinary-content"]}>
                 <SkeletonTheme color="#EDF0F3">
-                    <Skeleton height={300}/>
+                    <Skeleton height={370}/>
                 </SkeletonTheme>
             </div>
-            {/* <div className={s["ordinary-bottom"]}>
-                <div className={s["ordinary-bottom__date"]}>
-                    <SkeletonTheme color="#EDF0F3">
-                        <Skeleton height={30} width={80}/>
-                    </SkeletonTheme>
-                </div>
-                <div className={s["ordinary-bottom__action"]}>
-                    <button><SkeletonTheme color="#4B63D3">
-                        <Skeleton width={60}/>
-                    </SkeletonTheme></button>
-                </div>
-            </div> */}
+            <div style={{ height: "12px" }}></div>
+            <SkeletonTheme color="#EDF0F3">
+                <Skeleton height={52}/>
+            </SkeletonTheme>
         </div>
     );
 
