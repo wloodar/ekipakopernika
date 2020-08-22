@@ -34,7 +34,7 @@ class Events extends Component {
 
     render() {
         const { events, loading } = this.state;
-
+        // FA383E
         return (
             <main className={s.main}>
                 {loading ? <div>
@@ -83,9 +83,12 @@ class Events extends Component {
                                     <img src={createUrl(val.cover_pic, "_medium")}/>
                                 </div>
                             </div>
-                            <div className={s.time}>
+                            {val.old_time !== null ? <div className={s["time--new"]}>
+                                <span>{moment.unix(val.old_time).locale('pl').format("DD MMMM YYYY o HH:mm")}</span>
+                                <p>Nowy termin - {moment.unix(val.time).locale('pl').format("DD MMMM YYYY o HH:mm")}</p>
+                            </div> : <div className={s["time--casual"]}>
                                 <p>{moment.unix(val.time).locale('pl').format("DD MMMM YYYY o HH:mm")}</p>
-                            </div>
+                            </div> }
                             <div className={s.name}>
                                 <h3>{val.name}</h3>
                             </div>

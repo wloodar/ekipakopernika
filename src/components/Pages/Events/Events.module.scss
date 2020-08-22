@@ -109,13 +109,34 @@
 }
 
 .time {
-    margin-top: 1.2rem;
+    
+    &--casual, &--new {
+        margin-top: 1.2rem;
 
-    p {
-        text-transform: uppercase;
-        font-weight: 800;
-        color: var(--primary);
-        font-size: 1.4rem;
+        p {
+            text-transform: uppercase;
+            font-weight: 800;
+            font-size: 1.4rem;
+        } 
+    }
+
+    &--casual {
+        p {
+            color: var(--primary);
+        }
+    }
+
+    &--new {
+        p {
+            color: #FA383E;
+        }
+
+        span {
+            font-weight: 800;
+            font-size: 1.1rem;
+            color: var(--primary);
+            text-decoration: line-through;
+        }
     }
 }
 
