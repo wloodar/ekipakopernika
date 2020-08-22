@@ -3,6 +3,7 @@ import { withRouter, Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import axios from 'axios';
+import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
 import moment from 'moment';
 import 'moment/locale/pl';
 import { createUrl } from '../../../functions/ImageUrl';
@@ -36,7 +37,31 @@ class Events extends Component {
 
         return (
             <main className={s.main}>
-                {loading ? <p>laduje ...</p> : null}
+                {loading ? <div>
+                    <div className={s.banner}>
+                        <div className={s.calendar}>
+                            <div className={s.calendar__top}></div>
+                            <div className={s.calendar__day}>
+                                <p><SkeletonTheme color="#EDF0F3"><Skeleton /></SkeletonTheme></p>
+                            </div>
+                        </div>
+                        <div className={s.cover}>
+                            <SkeletonTheme color="#EDF0F3"><Skeleton height={300}/></SkeletonTheme>
+                        </div>
+                    </div>
+                    <div className={s.time}>
+                        <p><SkeletonTheme color="#EDF0F3"><Skeleton /></SkeletonTheme></p>
+                    </div>
+                    <div className={s.name}>
+                        <h3><SkeletonTheme color="#EDF0F3"><Skeleton height={30}/></SkeletonTheme></h3>
+                    </div>
+                    <div className={s.place}>
+                        <p><SkeletonTheme color="#EDF0F3"><Skeleton /></SkeletonTheme></p>
+                    </div>
+                    <div className={s.description}>
+                        <p><SkeletonTheme color="#EDF0F3"><Skeleton height={200}/></SkeletonTheme></p>
+                    </div>
+                </div> : null}
                 {!loading && events.length < 1 ? <div className={s.empty}>
                     <img src={EventGraphic}/>
                     <h5>Na ten moment nie odbywają się żadne wydarzenia...</h5>
