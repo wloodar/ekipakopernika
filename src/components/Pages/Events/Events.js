@@ -35,7 +35,7 @@ class Events extends Component {
         return (
             <main className={s.main}>
                 {loading ? <p>laduje ...</p> : null}
-                {!loading && events.length === 0 ? <div className={s.empty}>
+                {!loading && events.length < 1 ? <div className={s.empty}>
                     <img src={EventGraphic}/>
                     <h5>Na ten moment nie odbywają się żadne wydarzenia...</h5>
                 </div> : null}
