@@ -25,6 +25,8 @@ class Events extends Component {
         axios.get(`${process.env.REACT_APP_GLOBAL_API_URL}/events/fetch/all`).then(res => {
             if (res.data.status === 1) {
                 this.setState({ loading: false, events: res.data.events });
+            } else {
+                this.setState({ loading: false });
             }
         });
     }
