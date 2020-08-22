@@ -176,7 +176,6 @@
         // background-repeat: no-repeat;
         background: var(--primary);
         text-align: center;
-        border-radius: $border_radius;
 
         @include respond(tab-port) {
             border-radius: 0;
@@ -199,7 +198,7 @@
     }
 
     &__header {
-        margin-top: 7.4rem;
+        margin-top: 6.4rem;
         margin-bottom: 2.5rem;
 
         @media screen and (max-width: 480px) {
@@ -470,6 +469,22 @@
     }
 }
 
+.rules {
+    margin-top: 4.1rem;
+    text-align: center;
+
+    @include respond(tab-port) {
+        @include globalWidth;
+    }
+        
+    &__inner {
+        box-sizing: border-box;
+        border: 2px solid var(--newsurface-background);
+        border-radius: $border_radius;
+        padding: 1.7rem 1.4rem;
+        padding-bottom: 10rem;
+    }
+}
 
 .content {
     display: flex;

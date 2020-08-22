@@ -176,10 +176,13 @@ class Upload extends Component {
                     </div>
                 </div> : null}
 
-                {uploading === false && success === false ? <main className={s.main}>
-                    <div className={s.main__toph}>
+                {uploading === false && success === false ? 
+                <>
+                <div className={s.main__toph}>
                         <h2>Podziel się </h2>
                     </div>
+                <main className={s.main}>
+                    
 
                     <div className={s.person__container}>
                         <div className={s.main__header}>
@@ -248,6 +251,14 @@ class Upload extends Component {
                         </div>
                     </div>
 
+                    {/* <div className={s.rules}>
+                        <div className={s.rules__inner}>
+                            <div className={s.main__header} style={{ marginTop: 0, marginBottom: 0 }}>
+                                <h4>Zasady</h4>
+                            </div>
+                        </div>
+                    </div> */}
+
                     <div className={s.content}>
                         <div className={s.content__left}>
                             <div className={cs(s.attachments, s.content__box)}>
@@ -278,7 +289,7 @@ class Upload extends Component {
                         <button type="submit" className="bs-btn bs-btn--primary" onClick={this.submitPost}>Opublikuj</button>
                         <p>Publikując, oświadczam, że jestem autorem tekstu oraz załączonego materiału/materiałów.</p>
                     </div> : null}
-                </main> : null }
+                </main></> : null }
             </div>
         )
     }

@@ -3,6 +3,7 @@ import { withRouter, Link } from 'react-router-dom';
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
 import { createUrl } from '../../../functions/ImageUrl';
 import axios from 'axios';
+import moment from 'moment';
 import s from './Explore.module.scss';
 import Posts from './Posts/Posts';
 
@@ -15,7 +16,8 @@ class Explore extends Component {
         super(props);
         this.state = {
             categories: [],
-            feed: []
+            feed: [],
+            events: []
         };
     }
 
@@ -23,6 +25,12 @@ class Explore extends Component {
         axios.get(`${process.env.REACT_APP_GLOBAL_API_URL}/categories/feed`).then(res => {
             if (res.data.status === 1) {
                 this.setState({ categories: shuffle(res.data.categories).slice(0, 5) });
+            }
+        });
+
+        axios.get(`${process.env.REACT_APP_GLOBAL_API_URL}/events/fetch/all`).then(res => {
+            if (res.data.status === 1) {
+                this.setState({ events: res.data.events });
             }
         });
 
@@ -36,6 +44,8 @@ class Explore extends Component {
     }
 
     render() {
+        const { events } = this.state;
+
         return (
             <div className={s.container}>
                 <aside className={[s.menu, s.sticky].join(' ')}>
@@ -96,9 +106,23 @@ class Explore extends Component {
                             <h5>Wydarzenia</h5>    
                         </div>
                         <div className={s.events}>
-                            <div className={s.events__empty}>
+                            {events.length > 0 ? <div>
+                                <div className={s.events__item}>
+                                    <div className={s.events__image}>
+                                        <img src={createUrl(events[0].cover_pic, "_small")}/>
+                                    </div>
+                                    <div className={s.events__info}>
+                                        <h4>{events[0].name}</h4>
+                                        <p>{moment.unix(events[0].time).format("DD / MM / YYYY, HH:mm")}</p>
+                                    </div>
+                                </div>
+                                
+                                <div className={s.categories__all}>
+                                    <Link to="/wydarzenia">Przejdź do wydarzeń {events.length > 1 ? <span className={s.events__count}>{events.length}</span> : null}</Link>
+                                </div>
+                            </div> : <div className={s.events__empty}>
                                 <p>Brak wydarzeń</p>
-                            </div>
+                            </div> }
                         </div>
                         <div className={s.sidebar__footer}>
                             <ul>

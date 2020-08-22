@@ -160,7 +160,7 @@ class AppLayout extends Component {
                         <ul id="mn_nav">
                             <li><NavLink exact to="/" activeClassName={[s['nav-list--active'], "mn_nav_active"].join(' ')}>Odkryj</NavLink></li>
                             <li><NavLink to="/kategorie" activeClassName={[s['nav-list--active'], "mn_nav_active"].join(' ')}>Kategorie</NavLink></li>
-                            {/* <li><NavLink to="/wydarzenia" activeClassName={[s['nav-list--active'], "mn_nav_active"].join(' ')}>Wydarzenia</NavLink></li> */}
+                            <li><NavLink to="/wydarzenia" activeClassName={[s['nav-list--active'], "mn_nav_active"].join(' ')}>Wydarzenia</NavLink></li>
                             <li><NavLink to="/onas" activeClassName={[s['nav-list--active'], "mn_nav_active"].join(' ')}>O nas</NavLink></li>
                             <hr id="nav_slide_click"/>
                         </ul>
@@ -184,7 +184,7 @@ class AppLayout extends Component {
                                 <Link to="/"><img src={Logo}/></Link>
                                 <li><NavLink exact to="/" activeClassName={[s['nav-list--active'], "mn_nav_active"].join(' ')}>Odkryj</NavLink></li>
                                 <li><NavLink to="/kategorie" activeClassName={[s['nav-list--active'], "mn_nav_active"].join(' ')}>Kategorie</NavLink></li>
-                                {/* <li><NavLink to="/wydarzenia" activeClassName={[s['nav-list--active'], "mn_nav_active"].join(' ')}>Wydarzenia</NavLink></li> */}
+                                <li><NavLink to="/wydarzenia" activeClassName={[s['nav-list--active'], "mn_nav_active"].join(' ')}>Wydarzenia</NavLink></li>
                                 <li><NavLink to="/onas" activeClassName={[s['nav-list--active'], "mn_nav_active"].join(' ')}>O nas</NavLink></li>
                                 <li><NavLink to="/dodaj" activeClassName={[s['nav-list--active'], "mn_nav_active"].join(' ')}>Podziel się</NavLink></li>
                                 <hr id="nav_slide_click"/>
