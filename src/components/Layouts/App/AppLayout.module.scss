@@ -218,24 +218,33 @@
 }
 
 .footer {
-    @include globalWidth;
-    border-top: 1px solid #EDF0F3;
+    // @include globalWidth;
+    // border-top: 1px solid #EDF0F3;
+    background: lighten($color: #EDF0F3, $amount: 3%);
     padding-top: 2.1rem;
     // margin-top: 5.7rem;
 
     &__inner {
         width: 100%;
+        padding-top: 2.3rem; padding-bottom: 1.7rem;
         // border-top: 1px solid #e7e7e7;
-        padding: 1.7rem 0;
+        // padding: 1.7rem 0;
+        @include globalWidth;
     }
 
     &__quotation {
-        text-align: center;
-        margin-bottom: 3.5rem;
+        // text-align: center;
+        // margin-bottom: 3.5rem;
+        margin-bottom: 7.2rem;
+
+        h5 {
+            font-size: 1.8rem;
+            font-weight: 500;
+        }
 
         p {
             font-weight: 500;
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             color: darken($color: #EDF0F3, $amount: 25%);
         }
     }
@@ -261,6 +270,10 @@
     &__author {
         float: left;
 
+        @include respond(phone) {
+            float: none;
+        }
+
         a {
             color: var(--primary);
         }
@@ -268,6 +281,15 @@
 
     &__copyright {
         float: right;
+
+        @include respond(phone) {
+            float: none;
+            padding-top: .2rem;
+            
+            p {
+                font-size: 1rem;
+            }
+        }
     }
 }
 

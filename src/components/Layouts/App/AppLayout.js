@@ -6,9 +6,8 @@ import PropTypes from 'prop-types';
 import s from './AppLayout.module.scss';
 import $ from 'jquery';
 import Icon from '../../Icons/base';
-import FooterBanner from './banner2.png';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
-// import './main';
+
 import './style.css';
 import Logo from './logo.png';
  
@@ -206,10 +205,8 @@ class AppLayout extends Component {
             <footer className={s.footer}>
                 <div className={s['footer__inner']}>
                     <div className={s['footer__quotation']}>
+                        <h5>#EkipaKopernika</h5>
                         <p>Dawna i nowoczesna kultura okiem #EkipyKopernika”</p>
-                    </div>
-                    <div className={s['footer__banner']}>
-                        <img src={FooterBanner}/>
                     </div>
                     <div className={s['footer__bottom']}>
                         <div className={s['footer__author']}>
