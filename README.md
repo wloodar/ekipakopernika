@@ -1,10 +1,10 @@
 # `Ekipakopernika - School App`
 
-This is frontend part of application made for school in Chełmno. Sadly, project has finished and website took down :(
+This is frontend part of application made for school in Chełmno. Sadly, project has finished and website took down.
 
 ## Technologies
 
-List of technologies I used for frontend of this app
+List of technologies I used for frontend of this app:
 
 - [ReactJS](https://reactjs.org/) 
 - [Redux](https://redux.js.org/)
