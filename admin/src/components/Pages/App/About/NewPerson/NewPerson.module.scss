@@ -1,0 +1,73 @@
+@import '../../../../../sass/config.scss';
+
+.header {
+    margin-top: 1.5rem;
+
+    &:first-of-type {
+        margin-top: 0;
+    }
+}
+
+.create {
+
+    &__row {
+        textarea {
+            font-size: 1.2rem !important;
+        }
+    }
+
+    &__uploadimg {
+        margin-top: 1.4rem;
+        text-align: center;
+        margin-bottom: 3.7rem;
+
+        label {
+            text-align: center;
+            display: block;
+            width: 100%;
+            font-size: 1.1rem;
+            font-weight: 700;
+            padding: 1.2rem .7rem;
+            cursor: pointer;
+            color: var(--primary-text);
+            background: var(--porcelain);
+            border-radius: $border_radius;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            svg {
+                width: 1.3rem; height: 1.3rem;
+                margin-right: .6rem;
+            }
+        }
+
+        input {
+            display: none;
+        }
+
+        span {
+            display: block;
+            margin-top: 1.4rem;
+            padding: 1rem 0;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--green);
+        }
+    }
+
+    &__submit {
+        @include clearfix;
+
+        button {
+            float: right;
+            width: 8.9rem;
+            cursor: pointer;
+
+            div {
+                display: inline-block;
+                margin-left: auto; margin-right: auto;
+            }
+        }
+    }
+}

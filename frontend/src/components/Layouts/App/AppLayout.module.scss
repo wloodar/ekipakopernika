@@ -1,0 +1,286 @@
+@import '../../../sass/config.scss';
+
+.sticky {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    z-index: 1020;
+}
+
+// * main
+
+.wrap {
+    margin-top: 5.7rem;
+    background: var(--bg-color);
+    padding-bottom: 10.4rem;
+}
+
+.nav {    
+    position: fixed;
+    top: 0; right: 0; left: 0;
+    z-index: 999;
+    background: #fff;
+    border-bottom: 1px solid #f4f4f4;
+    @include createTransition(.3s, ease);
+
+    @include respond(tab-port) {
+        @include createShadow(rgba(25, 28, 31, 0.05) 0 0 0);
+    }
+
+    &__inner {
+        @include globalWidth;
+        background: #fff;
+        padding-top: 2.4rem; padding-bottom: 2.4rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        z-index: 9999;
+
+        @include respond(tab-port) {
+            padding-top: 1.5rem; padding-bottom: 1.5rem;
+            display: none;
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #111;
+        }
+
+        img {
+            width: auto;
+            height: 2.5rem;
+        }
+    }
+}
+
+.nav-list {
+    position: relative;
+
+    ul {
+        text-align:center;
+
+        li {
+            display: inline-block;
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: #333;
+
+            a {
+                display:inline-block;
+                padding-right: 2.3rem;
+                padding-left: 2.3rem; 
+                box-sizing: border-box;           
+            }
+        }
+
+        hr {
+            transition: .3s all ease;
+            background: var(--primary);
+            height: 4px;
+            width: 0;
+            margin-left: 0;
+            border: 0;
+            border-radius: 200px 200px 0 0;
+            position: absolute;
+            left: 0;
+            bottom: -2.65rem;
+        }
+    }
+
+    &--active {
+        color: var(--primary) !important;
+    }
+}
+
+.nav-share {
+
+    a {
+        display: flex;
+        align-items: center;
+        box-sizing: border-box;
+        border-radius: 70px;
+        background: var(--primary);
+        padding: .5rem 1.5rem;
+    }
+
+    p {
+        font-size: 1.15rem;
+        font-weight: 600;
+        color: #fff;
+    }
+
+    svg {
+        width: 1.4rem;
+        fill: #fff;
+    }
+}
+
+.nav-responsive {
+    display: none;
+    z-index: 999;
+    @include createShadow(rgba(25, 28, 31, 0.03) 16px 9px 10px);
+    background: #fff;
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
+
+    @include respond(tab-port) {
+        display: block;
+    }
+
+    &__menu {
+        @include globalWidth;
+        position: relative;
+
+        ul {
+            text-align: center;
+            overflow-x: auto;
+            overflow-y: hidden;
+            -webkit-overflow-scrolling: touch;
+            white-space: nowrap;
+
+            .js & {
+                -ms-overflow-style: -ms-autohiding-scrollbar;
+
+                &::-webkit-scrollbar {
+                    display: none;
+                }
+            }
+
+            h5 {
+                display: inline-block;
+                font-size: 1.4rem;
+                padding-right: 2.4rem;
+            }
+
+            img {
+                display: inline-block;
+                width: auto;
+                height: 2.9rem;
+                margin-bottom: -1.1rem;
+                padding-right: 2.4rem;
+            }
+
+            li {
+                display: inline-block;
+                font-size: 1.35rem;
+                font-weight: 600;
+                color: #222;         
+
+                a {
+                    display: block;
+                    padding-right: 2rem; padding-left: 2rem; 
+                    padding: 1.9rem 2rem 2.1rem !important;
+                    box-sizing: border-box;            
+                }
+            }
+
+            hr {
+                transition: .3s all ease;
+                background: var(--primary);
+                height: 3px;
+                width: 0;
+                margin-left: 0;
+                border: 0;
+                border-radius: 200px 200px 0 0;
+                position: absolute;
+                left: 0;
+                bottom: -.1px;
+            }
+        }
+    }
+
+    &__fade {
+        position: absolute;
+        top: 0; bottom: 4px;
+        width: 2.4rem;
+        z-index: 9999;
+
+        &--right {
+            right: 1.4rem;
+            background: linear-gradient(to left, white, rgba($color: #fff, $alpha: .1) 100%);
+        }
+    }
+}
+
+.footer {
+    background: lighten($color: #EDF0F3, $amount: 3%);
+    padding-top: 2.1rem;
+
+    &__inner {
+        width: 100%;
+        padding-top: 2.3rem; padding-bottom: 1.7rem;
+        @include globalWidth;
+    }
+
+    &__quotation {
+        margin-bottom: 7.2rem;
+
+        h5 {
+            font-size: 1.8rem;
+            font-weight: 500;
+        }
+
+        p {
+            font-weight: 500;
+            font-size: 1.2rem;
+            color: darken($color: #EDF0F3, $amount: 25%);
+        }
+    }
+
+    &__banner {
+        max-width: 64rem;
+        margin-left: auto; margin-right: auto;
+        margin-bottom: 3.4rem;
+    }
+
+    &__bottom {
+        @include clearfix;
+        width: 100%;
+        display: inline-block; 
+
+        p {
+            color: darken($color: #EDF0F3, $amount: 25%);
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+    }
+
+    &__author {
+        float: left;
+
+        @include respond(phone) {
+            float: none;
+        }
+
+        a {
+            display: flex;
+            align-items: center;
+        }
+
+        p {
+            color: darken($color: #EDF0F3, $amount: 40%);
+        }
+
+        img {
+            margin-left: 1.2rem;
+            width: 7.4rem;
+        }
+    }
+
+    &__copyright {
+        float: right;
+
+        @include respond(phone) {
+            float: none;
+            padding-top: 2.4rem;
+            
+            p {
+                font-size: 1rem;
+            }
+        }
+    }
+}
+

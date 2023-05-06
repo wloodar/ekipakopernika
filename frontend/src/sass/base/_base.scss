@@ -1,0 +1,151 @@
+@import url('https://fonts.googleapis.com/css?family=Manrope:300,400,500,600,700,800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap');
+// @import url('https://fonts.googleapis.com/css2?family=Tinos:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+// @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700;800&display=swap');
+
+*,
+*::after,
+*::before {
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit;
+    -webkit-appearance: none !important;
+    -moz-appearance: none;
+    appearance: none;
+    // -webkit-font-smoothing: antialiased !important;
+    // -webkit-font-smoothing: none !important;
+}
+
+html {
+    font-size: 62.5%;
+
+    @include respond(phone) {
+        font-size: 50%;
+    }
+    @include respond(tab-port) {
+        font-size: 50%;
+    }
+    @include respond(tab-land) {
+        font-size: 60%;
+    }
+
+    font-family: sans-serif;
+}
+
+/* Space out content a bit */
+body {
+    font-size: 1.5rem;
+    // font-family: 'Montserrat', sans-serif;
+    // font-family: 'Poppins', sans-serif;
+    // background: var(--bg-color);
+    font-family: 'Manrope', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+    outline: 0;
+    text-decoration: none;
+    color: inherit;
+}
+
+input, button {
+    outline: 0;
+    // font-family: 'Poppins', sans-serif;
+    font-family: 'Manrope', sans-serif;
+    border: 0;
+}
+
+input, textarea {
+    // font-family: 'Poppins', sans-serif;
+    font-family: 'Manrope', sans-serif;
+}
+
+ul {
+    list-style-type: none;
+}
+
+img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+
+.disable-css-transitions {
+    -webkit-transition: none !important;
+    -moz-transition: none !important;
+    -o-transition: none !important;
+    transition: none !important;
+}
+
+
+:root {
+    --primary: #4B63D3;
+    --reject: #D34B4B;
+    --negative: hsl(350, 87%, 56%);
+    --green: #4CB070;
+    // --bg-color: #F1F2F5;
+    // --bg-color: #f8f8fa;
+    --bg-color: #fff;
+
+    --nav-bar-background: #fff;
+    --nav-bar-shadow: #efefef;
+    --nav-bar-border: rgba(255,255,255,0);
+    --nav-bar-icons: #444444;
+
+    --primary-text: #2f2f2f;
+    --secondary-text: #333;
+    --dark-gray-text: #5e676e;
+    --gray-text: #777;
+    --black-white-btn: #fafafa;
+    --welcome-theme-border: #eeeeee;
+    --surface-background: #fff;
+    --newsurface-background: #EDF0F3;
+    --convs-viewed-background: #fff;
+    --convs-top-bar-background: rgba(255,255,255,.94);
+    --convs-message-bubble: #e4e7eb;
+    --convs-loading-background: #f0f2f4;
+
+    --shadow-1: 0 1px 3px rgba(0,0,0,.05);
+    --shadow-2: rgba(0, 0, 0, 0.15);
+
+    --gradient-turquoise: #14bae4 linear-gradient(45deg,#14bae4,#14e4a6);
+    --gradient-blue: #448bff linear-gradient(45deg,#448bff,#44e9ff);
+    --gradient-pink: #f54394 linear-gradient(45deg,#f54394,#f543ed);
+    --gradient-green: #31c971 linear-gradient(45deg,#31c971,#3dc931);
+}
+
+[data-theme="dark"] {
+    --primary: #4B63D3;
+    --reject: #D34B4B;
+    --negative: hsl(350, 87%, 56%);
+    --green: #4CB070;
+    --bg-color: #18191A;
+
+    --nav-bar-background: #242524;
+    --nav-bar-shadow: rgba(255,255,255,0);
+    --nav-bar-border: #393a3a;
+    --nav-bar-icons: #eeeeee;
+
+    --primary-text: #eeeeee;
+    --secondary-text: #b0b3b7;
+    --dark-gray-text: #5e676e;
+    --gray-text: #777;
+    --black-white-btn: #222222;
+    --welcome-theme-border: rgba(255,255,255,0);
+    --surface-background: #242524;
+    --newsurface-background: #EDF0F3;
+    --convs-viewed-background: #242524;
+    --convs-top-bar-background: rgba(36,37,36,.97);
+    --convs-message-bubble: #242524;
+    --convs-loading-background: #242524;
+
+    --shadow-1: 0 1px 3px rgba(0,0,0,.05);
+    --shadow-2: rgba(0, 0, 0, 0.15);
+
+    --gradient-turquoise: #14bae4 linear-gradient(45deg,#14bae4,#14e4a6);
+    --gradient-blue: #448bff linear-gradient(45deg,#448bff,#44e9ff);
+    --gradient-pink: #f54394 linear-gradient(45deg,#f54394,#f543ed);
+    --gradient-green: #31c971 linear-gradient(45deg,#31c971,#3dc931);
+}

@@ -1,0 +1,36 @@
+@import "../../../../sass/config.scss";
+
+.drop {
+    // border: 2px dotted darken($color: #EDF0F3, $amount: 2%);
+    background: lighten($color: #EDF0F3, $amount: 3%);
+    border-radius: $border_radius;
+    text-align: center;
+    cursor: pointer;
+    outline: 0 !important;
+    @include createTransition(.4s, ease);
+
+    &:hover {
+        background: lighten($color: $col_primary, $amount: 30%);
+    }
+
+    p {
+        padding: 4.5rem 0;
+        font-weight: 700;
+        color: #444;
+    }
+}
+
+.files {
+    margin-top: 3.1rem;
+    display: grid;
+    grid-column-gap: 1.8rem;
+    grid-row-gap: 1.2rem;
+    // grid-template-columns: calc(33.33% - 1.2rem) calc(33.33% - 1.2rem) calc(33.33% - 1.2rem);
+    grid-template-columns: calc(50% - 1.2rem) calc(50% - 1.2rem);
+    padding-bottom: 1.2rem;
+
+    @media screen and (max-width: 480px) {
+        display: block;
+        margin-top: 1.2rem;
+    }
+}

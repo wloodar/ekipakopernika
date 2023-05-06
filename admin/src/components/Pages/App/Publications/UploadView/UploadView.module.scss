@@ -1,0 +1,30 @@
+@import '../../../../../sass/config.scss';
+
+.drop {
+    outline: 0;
+    background: lighten($color: $col_primary, $amount: 44%) !important;
+    text-align: center;
+    padding: 3.1rem 0;
+    border-radius: $border_radius;
+    cursor: pointer;
+    
+    p {
+        color: var(--primary);
+        font-weight: 600;
+    }
+}
+
+.files {
+    margin-top: 3.1rem;
+    display: grid;
+    grid-column-gap: 1.8rem;
+    grid-row-gap: 1.2rem;
+    // grid-template-columns: calc(33.33% - 1.2rem) calc(33.33% - 1.2rem) calc(33.33% - 1.2rem);
+    grid-template-columns: calc(50% - 1.2rem) calc(50% - 1.2rem);
+    padding-bottom: 1.2rem;
+
+    @media screen and (max-width: 480px) {
+        display: block;
+        margin-top: 1.2rem;
+    }
+}

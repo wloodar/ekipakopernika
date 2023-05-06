@@ -1,0 +1,63 @@
+@import '../../../../sass/config.scss';
+
+.aside-nav {
+    // pointer-events: inherit;
+    // display: -ms-flexbox;
+    // display: flex;
+    // -ms-flex-direction: column;
+    // flex-direction: column;
+    // height: 100%;
+    // box-sizing: border-box;
+
+    &__item {
+        border-radius: 0 100px 100px 0;
+        overflow: hidden;
+
+        a {
+            // padding: 1.1rem 2.4rem;
+            padding: 1.5rem 2.4rem;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            @include createTransition(.3s, ease);
+
+            &:hover {
+                background: var(--newlight-gray);
+            }
+        }
+
+        &--active {
+            background: lighten($color: $col_primary, $amount: 44%) !important;
+            
+            p {
+                color: var(--primary) !important;
+            }
+
+            svg {
+                stroke: var(--primary) !important;
+            }
+        }
+    }
+
+    &__icon {
+        height: 1.7rem;
+
+        svg {
+            width: 1.7rem;
+            stroke: #333;
+            @include createTransition(.2s, ease);
+        }
+    }
+
+    &__name {
+        flex: 1;
+        padding-left: 1.6rem;
+
+        p {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #333;
+            @include createTransition(.2s, ease);
+        }
+    }
+}

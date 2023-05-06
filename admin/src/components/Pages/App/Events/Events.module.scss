@@ -1,0 +1,67 @@
+@import '../../../../sass/config.scss';
+
+.wrap {
+    @include clearfix;
+    margin-top: 2.4rem;
+}
+
+.useractions {
+    width: 30.6rem;
+    margin-right: 1.4rem;
+    float: left;
+}
+
+.new, .edits, .categories {
+    padding: 1.6rem 2.1rem; 
+    box-sizing: border-box;
+}
+
+.categories {
+    width: calc(100% - 32rem);
+    float: left;
+
+    ul {
+        li {
+            margin-top: 1.7rem;
+
+            &:first-of-type {
+                margin-top: 0;
+            }
+        }
+    }
+}
+
+.item {
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+    border-radius: $border_radius;
+    @include createTransition(.3s, ease);
+
+    &:hover {
+        background: var(--newlight-gray);
+    }
+
+    &__image {
+        width: 12rem;
+        border-radius: $border_radius;
+        overflow: hidden;
+    }
+
+    &__info {
+        padding-left: 2.1rem;
+        box-sizing: border-box;
+
+        h3 {
+            font-size: 1.7rem;
+            font-weight: 700;
+            color: var(--gray-text);
+        }
+
+        p {
+            font-weight: 500;
+            font-size: 1.3rem;
+            color: var(--gray-text);
+        }
+    }
+}

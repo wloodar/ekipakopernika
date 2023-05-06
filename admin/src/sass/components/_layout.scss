@@ -1,0 +1,264 @@
+.sticky {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    z-index: 1020;
+}
+
+.align {
+
+    &--center {
+        display: -webkit-flex;
+        -webkit-align-items: center;
+        display: flex;
+        align-items: center;
+    }
+}
+
+.b-back {
+    padding-bottom: 1.7rem;
+    margin-bottom: 2.4rem;
+    border-bottom: 1px solid var(--border-2);
+
+    a {
+        display: flex;
+        align-items: center;
+        font-size: 2.7rem;
+        color: var(--primary-text);
+
+        svg {
+            display: block;
+            width: 2.4rem; height: 2.4rem;
+            stroke: var(--gray-text);
+        }
+
+        p {
+            padding-left: 1.7rem;
+        }
+    }
+}
+
+.card {
+    background: #fff;
+    border: 1px solid var(--border-2);
+    border-radius: $border_radius;
+    box-sizing: border-box;
+
+    &__swidth {
+        max-width: 50rem;
+        margin-left: auto; margin-right: auto;
+    }
+
+    &__bsheader {
+        h5 {
+            font-size: 2.1rem;
+            color: var(--primary-text);
+        }
+
+        &--lpadding {
+            padding-bottom: 1.9rem;
+        }
+
+        &--spadding {
+            padding-bottom: .9rem;
+        }
+    }
+
+    &__tmargin {
+        &--common {
+            margin-top: 2.5rem;
+        }
+    }
+
+    &__apadding {
+        &--common {
+            padding: 1.4rem 2.1rem 1.7rem;
+        }
+    }
+
+    &__blockbtn {
+        
+        button {
+            border: 0;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        &--text button {
+            background: transparent;
+            font-size: 1.2rem;
+            color: var(--primary);
+        }
+    }
+
+    &__action {
+        &--common {
+            a {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                color: var(--primary);
+                font-weight: 600;
+                font-size: 1.4rem;
+        
+                p {
+                    padding-left: .7rem;
+                }
+            }
+        }
+    }
+
+    &__bottomaction {
+        margin-top: 1.4rem;
+        margin-left: -2.1rem; margin-right: -2.1rem; margin-bottom: -1.7rem;
+        border-top: 1px solid var(--border-2);
+        width: calc(100% + 4.2rem);
+        padding: 1.9rem 2.1rem;
+
+        a {
+            color: var(--primary);
+            font-size: 1.4rem;
+            font-weight: 600;
+        }
+    }
+}
+
+.card-row {
+    display: flex;
+
+    &__equal .card {
+        width: calc(50% - 1.2rem);
+        margin-left: 1.2rem;
+
+        &:first-of-type {
+            margin-left: 0; margin-right: 1.2rem;
+        }
+    }
+
+    &__lsmall .card {
+        &:first-of-type {
+            width: 19rem;
+
+        }
+
+        &:last-of-type {
+            width: calc(100% - 20.4rem);
+        }
+    }
+}
+
+.card-form {
+
+    &__search {
+        box-sizing: border-box;
+
+        input {
+            border-radius: $border_radius;
+            background: var(--porcelain);
+            border: 0;
+            color: #111;
+            font-weight: 500;
+            font-size: 1.4rem;
+            padding: .9rem 1.2rem;
+        }
+
+        &--fwidth {
+            input {
+                width: 100%;
+            }
+        }
+    }
+
+    &__row {
+        margin-top: 1.4rem;
+        box-sizing: border-box;
+
+        label {
+            display: block;
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: .3rem;
+            color: var(--light-gray);
+        }
+
+        select {
+            cursor: pointer;
+        }
+
+        textarea {
+            resize: none; 
+            outline: 0;
+            font-size: 1.4rem !important;
+        }
+
+        input, select, textarea {
+            padding: .8rem 1rem;
+            border-radius: $border_radius;
+            font-weight: 600;
+            font-size: 1.2rem;
+            border: 1px solid var(--border-2);
+        }
+
+        &--fwidth {
+            input, select, textarea {
+                width: 100%;
+            }
+        }
+    }
+
+    &__error {
+        font-size: 1rem;
+        font-weight: 600;
+        color: var(--negative);
+        padding-top: .5rem;
+    }
+
+    &__btn {
+        margin-top: .7rem;
+        border: 0;
+        border-radius: $border_radius;
+        font-size: 1.2rem;
+        font-weight: 700;
+        padding: 1rem 2.1rem;
+        cursor: pointer;
+
+        &--fwidth {
+            width: 100%;
+        }
+
+        &--submit {
+            background: var(--primary);
+            color: #fff;
+        }
+
+        &--reject {
+            background: var(--negative);
+            color: #fff;
+        }
+
+        &--right {
+            float: right;
+        }
+    }
+}
+
+.user-icon {
+    margin-right: 2.1rem;
+    border-radius: 100px;
+    overflow: hidden;
+    position: relative;
+
+    a {
+        position: absolute;
+        left: 0; right: 0; top: 0; bottom: 0;
+        z-index: 1;
+    }
+
+    span {
+        @include absoluteCenter;
+        font-weight: 700;
+        font-size: 1.4rem;
+        text-transform: uppercase;
+        color: #fff;
+    }
+}

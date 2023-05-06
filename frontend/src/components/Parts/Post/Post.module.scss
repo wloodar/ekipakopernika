@@ -1,0 +1,240 @@
+@import '../../../sass/config.scss';
+
+.item {
+    margin-top: .4rem;
+    border-radius: 12px;
+    background: #fff;
+    padding: 1.2rem 2.1rem;
+
+    @include respond(tab-land) {
+        padding: 0;
+        margin-top: 2.1rem;
+    }
+
+    &:nth-child(1) {
+        margin-top: 0;
+    }
+}
+
+.ordinary-name {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 1.7rem;
+    border-bottom: 1px solid #EDF0F3;
+
+    &__info {
+        display: flex;
+        align-items: center;
+    }
+
+    &__date {
+        p {
+            display: inline-block;
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: #222;
+            background: #EDF0F3;
+            border-radius: 100px;
+            padding: .9rem 1.3rem;
+        }
+    }
+
+    &__icon {
+        width: 4.9rem; height: 4.1rem;
+        border-radius: $border_radius;
+        position: relative;
+        overflow: hidden;
+
+        img {
+            object-fit: cover;
+            height: 100%;
+        }
+    }
+
+    &__person {
+        padding-left: 2.1rem;
+
+        h5 {
+            font-size: 1.8rem;
+            color: var(--primary-text);
+            line-height: 98%;
+        }
+
+        p {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: darken($color: #EDF0F3, $amount: 25%);
+        }
+
+        a {
+            font-size: 1.6rem;
+            font-weight: 700;
+        }
+    }
+}
+
+.ordinary-content {
+    margin-top: 1.2rem;
+
+    p {
+        font-size: 1.4rem;
+        font-weight: 500;
+        line-height: 1.5;
+        color: rgba(41, 41, 41, 1);
+        white-space: pre-wrap;
+        text-indent: 4.5rem;
+    }
+
+    button {
+        text-align: center;
+        margin-top: 1.4rem;
+        width: 100%;
+        cursor: pointer;
+        color: var(--primary);
+        font-size: 1.2rem;
+        font-weight: 800;
+        border-radius: 4px;
+        background: transparent;
+        padding: .6rem 0;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+}
+
+.ordinary-images {
+    margin-top: 1.9rem;
+
+    span {
+        display: block;
+        width: 100%;
+    }
+
+    & > div {
+        border-radius: $border_radius !important;
+        -webkit-border-radius: $border_radius !important;
+        -moz-border-radius: $border_radius !important;
+        overflow: hidden !important;
+        perspective: $border_radius !important; 
+    }
+
+    ul:first-child {
+        li {
+            background: transparent !important;
+        }
+    }
+
+    &__item {
+
+        &--single {
+            span {
+                border-radius: $border_radius;
+                overflow: hidden;
+            }
+        }
+    }
+}
+
+.ordinary-bottom {
+    width: 100%;
+    margin-top: 2.1rem;
+    display: inline-block;
+    @include clearfix;
+
+    span {
+        border-radius: 100px;
+    }
+
+    &__date {
+        float: left;
+
+        p {
+            display: inline-block;
+            font-size: 1.05rem;
+            font-weight: 800;
+            color: #222;
+            background: #EDF0F3;
+            border-radius: 100px;
+            padding: .9rem 1.2rem;
+        }
+    }
+
+    &__action {
+        float: right;
+
+        button {
+            cursor: pointer;
+            font-size: 1.05rem;
+            font-weight: 800;
+            color: #fff;
+            background: var(--primary);
+            border-radius: 100px;
+            padding: .9rem 1.7rem;
+        }
+    }
+}
+
+.ordinary-share {
+    margin-top: 1.7rem;
+    border-radius: $border_radius;
+    border: 2px solid var(--newsurface-background);
+    padding: 1.7rem 2.4rem;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    @include respond(phone) {
+        padding: 0;
+        border: 0;
+        padding-bottom: 2.4rem;
+    }
+
+    &__info {
+        @include respond(phone) {
+            width: calc(100% - 9rem);
+        }
+    }
+
+    &__header {
+        
+        h5 {
+            font-size: 1.2rem;
+            font-weight: 500;
+            color: darken($color: #EDF0F3, $amount: 25%);
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+        }
+    }
+
+    &__link {
+
+        p {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--primary);
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+        }
+    }
+
+    &__action {
+        @include clearfix;
+
+        @include respond(phone) {
+            width: 9rem;
+        }
+
+        button {
+            float: right;
+            display: block;
+            height: 100%;
+            cursor: pointer;
+            @include createTransition(.3s, ease);
+        }
+    }
+}

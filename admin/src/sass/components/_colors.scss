@@ -1,0 +1,21 @@
+.bs-gradient {
+    &--pink {
+        background: #f54394 linear-gradient(45deg,#f54394,#f543ed) !important;
+    }
+    
+    &--turquoise {
+        background: #14bae4 linear-gradient(45deg,#14bae4,#14e4a6) !important;
+    }   
+    
+    &--blue {
+        background: #448bff linear-gradient(45deg,#448bff,#44e9ff) !important;
+    }
+    
+    &--orange {
+        background: #f4c414 linear-gradient(45deg,#f4c414,#f45414) !important;
+    }
+    
+    &--green {
+        background: #31c971 linear-gradient(45deg,#31c971,#3dc931) !important;
+    }
+}

@@ -1,0 +1,129 @@
+@import '../../../../sass/config.scss';
+
+.wrap {
+    @include clearfix;
+    margin-top: 2.4rem;
+}
+
+.useractions {
+    width: 30.6rem;
+    margin-right: 1.4rem;
+    float: left;
+}
+
+.new, .edits, .categories {
+    padding: 1.6rem 2.1rem; 
+    box-sizing: border-box;
+}
+
+.edits {
+    margin-top: 1.4rem;
+}
+
+.categories {
+    width: calc(100% - 32rem);
+    float: left;
+
+    ul {
+        li {
+            margin-top: 1.7rem;
+
+            &:first-of-type {
+                margin-top: 0;
+            }
+        }
+    }
+}
+
+.category {
+    display: flex;
+    align-items: center;
+
+    &__image {
+        margin-right: 1.4rem;
+        width: 12.4rem;
+        height: 4.5rem;
+        border-radius: $border_radius;
+        overflow: hidden;
+
+        img {
+            height: 100%;
+            object-fit: cover;
+        }
+    }
+
+    &__name {
+        width: calc(100% - 16.5rem);
+
+        input {
+            width: 95%;
+            font-size: 1.7rem;
+            font-weight: 500;
+            color: var(--gray-text);
+            border: 0;
+            box-sizing: border-box;
+            @include createTransition(.3s, ease);
+            
+            span {
+                color: var(--green);
+                font-weight: 600;
+            }
+
+            &:active, &:focus {
+                background: #EDF0F3;
+                border-radius: $border_radius;
+                padding: .5rem 1.2rem;
+            }
+        }
+         
+        p {
+            font-size: 1.2rem;
+            color: #99a0ab;
+            font-weight: 500;
+        }
+    }
+
+    &__actions {    
+        width: 6rem;
+        text-align: right;
+
+        svg {
+            width: 1.6rem;
+            stroke: var(--gray-text);
+            @include createTransition(.3s, ease);
+        }
+
+        button {
+            background: transparent;
+            padding: .2rem .4rem;
+            display: inline-block;
+            float: left;
+            border: 0;
+            cursor: pointer;
+
+            &:first-of-type {
+                margin-right: .5rem;
+            }
+        }
+
+        &--disable {
+            &:hover {
+                svg {
+                    stroke: var(--negative);
+                }
+            }
+        }
+
+        &--enable {
+            svg {
+                stroke: var(--negative);
+            }
+
+            &:hover {
+                svg {
+                    stroke: var(--green);
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,24 @@
+@import '../../../../sass/config.scss';
+
+.header-icon {
+    width: 9.4rem; height: 9.4rem;
+    border-radius: 300px;
+    margin-left: auto; margin-right: auto;
+    margin-bottom: 2.2rem;
+    position: relative;
+
+    &--admin {
+        background: var(--gradient--pink);
+    }
+
+    &--superadmin {
+        background: var(--gradient--turquoise);
+    }
+
+    span {
+        @include absoluteCenter;
+        font-size: 3rem;
+        font-weight: 700;
+        color: #fff;
+    }
+}

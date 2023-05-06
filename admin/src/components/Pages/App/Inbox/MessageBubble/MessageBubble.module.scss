@@ -1,0 +1,98 @@
+@import '../../../../../sass/config.scss';
+
+.item {
+    display: flex;
+    margin-bottom: 1.4rem;
+
+    &__you {
+        flex-direction: row-reverse;
+        text-align: right;
+    }
+
+    &__person {
+        width: 3.7rem; height: 3.7rem;
+        border-radius: 100px;
+        @include createShadow(0 5px 10px 0 rgba(50,50,50,.15));
+        overflow: hidden;
+        position: relative;
+        margin-left: .5rem; margin-right: .5rem;
+
+        span {
+            @include absoluteCenter;
+            font-weight: 700;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            color: #fff;
+        }
+
+        &--admin {
+            background: var(--gradient--pink);
+        }
+
+        &--superadmin {
+            background: var(--gradient--turquoise);
+        }
+    }
+
+    &__message {
+        margin-left: .5rem; margin-right: .5rem;
+    }
+
+    &__bubble {
+        background: #f8f8fc;
+        border-radius: $border_radius;
+        overflow: hidden;
+        padding: .9rem 1.4rem;
+        margin-bottom: .3rem;
+
+        p, a, span {
+            display: inline-block;
+            color: var(--gray-text);
+            font-size: 1.3rem;
+            font-weight: 500;
+        }
+
+        &--document {
+            background: #e1ecfe;
+            @include createShadow(0 5px 10px 0 rgba(50,50,50,.07));
+
+            a {
+                color: #448bfe;
+                font-weight: 500;
+            }
+
+            span {
+                padding-left: .3rem;
+                font-weight: 500;
+                opacity: .6;
+            }
+
+            svg {
+                width: 1.4rem;
+                margin-right: .9rem;
+                margin-bottom: -.2rem;
+                stroke: var(--gray-text);
+                opacity: .6;
+            }
+        }
+
+        &--image {
+            padding: 0 !important;
+            @include createShadow(0 5px 10px 0 rgba(50,50,50,.15));
+            max-width: 37rem;
+
+            img {
+                display: block;
+                width: 100%; height: auto;
+                object-fit: cover;
+            }
+        }
+    }
+
+    &__date {
+        font-size: .9rem;
+        font-weight: 500;
+        color: var(--gray-text);
+        opacity: .5;
+    }
+}

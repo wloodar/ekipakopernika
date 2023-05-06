@@ -1,0 +1,22 @@
+@import '../../../../sass/config.scss';
+
+.loading {
+    background: var(--newsurface-background);
+    border-radius: $border-radius;
+    margin: 1.2rem 4.2rem;
+    text-align: center;
+    height: 6rem;
+    position: relative;
+
+    span {
+        height: 6rem;
+    }
+
+    p {
+        @include absoluteCenter;
+        top: 55%;
+        font-weight: 600;
+        font-size: 1.3rem;
+        color: var(--dark-gray-text);
+    }
+}

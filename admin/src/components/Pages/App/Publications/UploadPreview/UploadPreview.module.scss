@@ -1,0 +1,65 @@
+@import '../../../../../sass/config.scss';
+
+.item {
+    border-radius: $border_radius;
+    overflow: hidden;
+    @include createShadow(0 0px 4px rgba(0, 0, 0, 0.15));
+
+    @media screen and (max-width: 480px) {
+        margin-top: 1.4rem;
+    }
+
+    &__image {
+        position: relative;
+        height: 27rem;
+
+        @media screen and (max-width: 480px) {
+            height: auto;
+            max-height: 70vh;
+        }
+         
+        img {
+            width: 100%;
+            height: 100%;
+            -o-object-fit: cover;
+            object-fit: cover;
+            font-family: "object-fit: cover";
+        }
+    }
+
+    &__overlay {
+        position: absolute;
+        left: 0; right: 0; bottom: 0; top: 0;
+        background: rgba($color: #000000, $alpha: 0.4);
+        z-index: 1;
+    }
+
+    &__bottom {
+        // padding: 30rem 1.9rem 1.5rem 1.9rem;
+        position: absolute;
+        left: 0; right: 0; bottom: 0;
+        padding: .5rem 1.5rem;
+        // text-align: right;
+
+        svg {
+            display: none;
+            float: left;
+            width: 2.1rem; height: auto;
+            stroke: #fff;
+        }
+
+        button {
+            float: right;
+            background: rgba($color: #000000, $alpha: 0);
+            // margin-bottom: 1.5rem;
+            background: var(--negative);
+            font-weight: 700;
+            color: #fff;
+            font-size: 1.1rem;
+            padding: .5rem 1rem;
+            margin-top: .7rem;
+            border-radius: $border_radius;
+            cursor: pointer;
+        }
+    }
+}

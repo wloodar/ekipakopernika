@@ -1,0 +1,100 @@
+@import '../../../../sass/config.scss';
+
+.wrap {
+    @include clearfix;
+    margin-top: 2.4rem;
+}
+
+.useractions {
+    width: 30.6rem;
+    margin-right: 1.4rem;
+    float: left;
+}
+
+.new, .edits, .people {
+    padding: 1.6rem 2.1rem; 
+    box-sizing: border-box;
+}
+
+.edits {
+    margin-top: 1.4rem;
+}
+
+.people {
+    width: calc(100% - 32rem);
+    float: left;
+
+    ul {
+        margin-top: 2.1rem;
+
+        li {
+            margin-top: 1.7rem;
+
+            &:first-of-type {
+                margin-top: 0;
+            }
+        }
+    }
+}
+
+.person {
+    display: flex;
+    align-items: center;
+    @include createTransition(.3s, ease);
+    border-radius: $border_radius;
+
+    &__image {
+        margin-right: 1.4rem;
+        width: 12.4rem;
+        height: 6.7rem;
+        border-radius: $border_radius;
+        overflow: hidden;
+
+        img {
+            height: 100%;
+            object-fit: cover;
+        }
+    }
+
+    &__name {
+        width: calc(100% - 16.5rem);
+         
+        p {
+            font-size: 1.7rem;
+            font-weight: 500;
+            color: var(--gray-text);
+        }
+    }
+
+    &__actions {
+        width: 6rem;
+        text-align: right;
+
+        svg {
+            width: 1.6rem;
+            stroke: var(--gray-text);
+            @include createTransition(.3s, ease);
+        }
+
+        button {
+            background: transparent;
+            padding: .2rem .4rem;
+            display: inline-block;
+            float: left;
+            border: 0;
+            cursor: pointer;
+
+            &:first-of-type {
+                margin-right: .5rem;
+            }
+        }
+
+        &--disable {
+            &:hover {
+                svg {
+                    stroke: var(--negative);
+                }
+            }
+        }
+    }
+}

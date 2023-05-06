@@ -1,0 +1,21 @@
+const redis = require('../../components/redis');
+
+module.exports = (req, res, next) => {
+    const { id } = req.params;
+
+    redis.get(id, (err, data) => {
+        if (err) {
+            console.log(err);
+            res.status(500).send(err);
+        }
+
+        if (data != null) {
+            req.cacheData = JSON.parse(data);
+            req.isCached = true;
+            next();
+        } else {
+            req.isCached = false;
+            next();
+        }
+    });
+}

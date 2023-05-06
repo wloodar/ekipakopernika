@@ -1,0 +1,58 @@
+@import '../../../../sass/config.scss';
+
+.form {
+    &__textarea {
+        textarea {
+            display: block;
+            width: 100%;
+            padding: 1.9rem 2.4rem;
+            line-height: 160%;
+            border-radius: $border_radius;
+            border: 0;
+            background: lighten($color: #EDF0F3, $amount: 3%);
+            font-size: 1.5rem;
+            color: #222;
+            font-weight: 600;
+            resize: none;
+            outline: 0;
+            @include createTransition(.3s, ease);
+        }
+
+        &--limit {
+            textarea {
+                background: lighten($color: hsl(350, 87%, 56%), $amount: 30%);
+            }
+        }
+    }
+
+    &__counter {
+        margin-top: .6rem;
+        text-align: right;
+
+        p, span {
+            @include createTransition(.3s, ease);
+        }
+
+        span {
+            opacity: 0;
+        }
+
+        p {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: darken($color: #EDF0F3, $amount: 12%);
+        }
+
+        &--visible {
+            p, span {
+                color: var(--negative) !important;
+                font-weight: 700 !important;
+                font-size: 1rem !important;
+            }
+
+            span {
+                opacity: 1;
+            }
+        }        
+    }
+}

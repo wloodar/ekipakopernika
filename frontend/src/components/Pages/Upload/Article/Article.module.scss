@@ -1,0 +1,33 @@
+@import '../../../../sass/config.scss';
+
+.article {
+    width: 100%;
+    margin-top: 9rem;
+}
+
+.title {
+    margin-bottom: .9rem;
+
+    textarea {
+        resize: none;
+        outline: 0;
+        border: 0;
+        overflow:hidden;
+        width: 100%; height: auto;
+        display: block;
+        background: rgba($color: #000000, $alpha: 0);
+        font-size: 4.7rem;
+        font-family: 'Playfair Display', serif;
+        color: #222;
+    }
+}
+
+.sub-title {
+    margin-bottom: 50px;
+
+    input {
+        background: rgba($color: #000000, $alpha: 0);
+        font-size: 1.5rem;
+        color: #444;
+    }
+}

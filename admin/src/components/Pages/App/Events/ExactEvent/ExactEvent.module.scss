@@ -1,0 +1,54 @@
+@import '../../../../../sass/config.scss';
+
+.event {
+    display: flex;
+}
+
+.cover {
+    width: 35%;
+    overflow: hidden;
+
+    img {
+        width: 100%;
+        border-radius: $border_radius;
+    }
+}
+
+.details {
+    width: calc(65% - 2.4rem);
+    margin-left: 2.4rem;
+}
+
+.counter {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #d5d5d5;
+    @include createTransition(.3s, ease);
+
+    &__warning {
+        color: var(--negative);
+    }
+}
+
+.picker > div {
+    width: 100%;
+    text-align: center;
+
+    & > div {
+        border: 1px solid var(--border-2);
+        border-radius: $border_radius;
+    }
+}
+
+.actions {
+    margin-top: 2.7rem;
+    text-align: right;
+
+    button {
+        margin-left: 1.2rem;
+
+        &:first-of-type {
+            margin-left: 0;
+        }
+    }
+}

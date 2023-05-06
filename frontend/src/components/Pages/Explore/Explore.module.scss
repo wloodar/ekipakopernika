@@ -1,0 +1,301 @@
+@import '../../../sass/config.scss';
+
+.container {
+    @include globalWidth;
+    background: var(--surface-background);
+    display: flex;
+    // justify-content: space-around;
+    // align-items: flex-start;
+    flex-direction: row;
+    overflow: visible;
+    position: relative;
+
+    &__mheader {
+        margin-bottom: 2.4rem;
+
+        h5 {
+            font-size: 2rem;
+            font-weight: 700;
+        }
+    }
+}
+
+.menu {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding-top: $main_top_padding;
+    box-sizing: border-box;
+    width: 29rem;   
+    z-index: 1;
+
+    @include respond(tab-land) {
+        display: none;
+    }
+}
+
+.categories {
+    top: calc(#{$main_top_padding} + 4rem);
+    position: sticky;
+
+    &__all {
+        margin-top: 1.9rem;
+        text-align: center;
+
+        a {
+            display: block;
+            background: #EDF0F3;
+            border-radius: 12px;
+            padding: 1.7rem 0;
+            font-size: 1.4rem;
+            font-weight: 600;
+        }
+    }
+}
+
+.sidebar {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding-top: $main_top_padding;
+    box-sizing: border-box;
+    width: 29rem;
+    z-index: 1;
+
+    &__inner {
+        top: calc(#{$main_top_padding} + 4rem);
+        position: sticky;
+    }
+
+    &__footer {
+        margin-top: 1.4rem;
+
+        ul {
+            li {
+                display: inline-block;
+                padding-top: .3rem;
+                padding-left: .9rem;
+                font-size: 1rem;
+                font-weight: 600;
+                color: darken($color: #EDF0F3, $amount: 25%);
+
+                &:first-of-type {
+                    padding-left: 0;
+                }
+            }
+        }
+    }
+
+    @include respond(tab-land) {
+        display: none;
+    }
+}
+
+.categories-item {
+    margin-top: .7rem;
+    width: 100%;
+    height: 7rem;
+    background: #fff;
+    box-sizing: border-box;
+    overflow: hidden;
+    position: relative;
+    @include createTransition(.4s, cubic-bezier(.38,.41,.26,1));
+
+    &:nth-of-type(4n) {
+        margin-right: 0 !important;
+    }
+
+    a {
+        display: block;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        z-index: 2;
+        @include createTransition(.3s, ease);
+
+        &:hover ~ div {
+            background: var(--newsurface-background);
+        }
+
+        &:hover ~ img {
+            transform: scale(0.8);
+        }
+    }
+
+    &__inner {
+        width: 100%; height: 100%;
+        display: flex;
+        align-items: center;
+        border-radius: $border-radius;
+        @include createTransition(.4s, cubic-bezier(.38,.41,.26,1));
+    }
+
+    &__image {
+        width: 40%; height: 100%;
+        border-radius: $border-radius;
+        overflow: hidden;
+        position: relative;
+
+        img {
+            height: 100%;
+            object-fit: cover;
+        }
+
+        div, span {
+            height: 100%;
+        }
+    }
+
+    &__info {
+        padding-left: 1.7rem;
+
+        h5 {
+            color: #000;
+            font-weight: 600;
+            font-size: 1.5rem;
+
+            span {
+                width: 8.7rem;
+            }
+        }
+
+        p {
+            display: block;
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: darken($color: #EDF0F3, $amount: 25%);
+
+            span {
+                width: 6rem;
+            }
+        }
+    }
+}
+
+.events {
+    &__empty {
+        text-align: center;
+
+        p {
+            display: block;
+            background: #EDF0F3;
+            border-radius: 12px;
+            padding: 3.4rem 0;
+            font-size: 1.4rem;
+            font-weight: 600;
+        }
+    }
+
+    &__item {
+        width: 100%;
+        height: 16rem;
+        border-radius: $border-radius;
+        overflow: hidden;
+        position: relative;
+    }
+
+    &__image {
+        width: 100%; height: 100%;
+        position: relative;
+
+        &::after {
+            position: absolute;
+            content: "";
+            width: 100%; height: 100%;
+            bottom: 0; left: 0;
+            background: #000;
+            background: linear-gradient(180deg,transparent,rgba(0,0,0,.62));
+            z-index: 0;
+            opacity: .8;
+            @include createTransition(.4s, cubic-bezier(.38,.41,.28,1));
+        }
+
+        img {
+            width: 100%; height: 100%;
+            object-fit: cover;
+        }  
+    }
+
+    &__info {
+        position: absolute;
+        bottom: 1rem; left: 1.2rem; right: 1.2rem;
+        color: #fff;
+
+        h4 {
+            font-size: 1.6rem;
+        }
+
+        p {
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+    }
+
+    &__count {
+        background: var(--primary);
+        color: #fff;
+        padding: .1rem .5rem;
+        border-radius: 150px;
+        font-size: 1rem;
+        font-weight: 800;
+        margin-left: .4rem;
+    }
+}
+
+.feed {
+    width: calc(100% - 57rem);
+
+    @include respond(tab-land) {
+        width: 100%;
+        max-width: 65rem;
+        margin-left: auto; margin-right: auto;
+    }
+}
+
+.feed-wrapper {
+    padding-top: $main_top_padding;
+    width: 57rem;
+    margin-left: auto; margin-right: auto;
+    box-sizing: border-box;
+
+    @include respond(tab-land) {
+        width: 100%;
+    }
+
+    @include respond(tab-port) {
+        padding-top: $main_top_padding__phone;
+    }
+
+    &__logo {
+        margin-bottom: 2.7rem;
+        text-align: center;
+        background: var(--primary);
+        margin: 0 4.2rem 2.1rem;
+        padding: 2.1rem 1.4rem;
+        border-radius: $border-radius;
+
+        @include respond(tab-land) {
+            margin: 0 0 2.7rem;
+        }
+
+        h5 {
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: #fff;
+            padding-bottom: 1.7rem;
+        }   
+
+        a {
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+
+        img {
+            width: 17rem;
+            margin-left: auto; margin-right: auto;
+        }
+    }
+}

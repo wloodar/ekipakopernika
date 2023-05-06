@@ -1,0 +1,92 @@
+.clearfix {
+    @include clearfix;
+}
+
+.bs-htext h1, h2, h3, h4, h5, h6 {
+    font-weight: 500;
+    font-size: 2rem;
+    color: #222;
+}
+
+.bs-logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #5F6368;
+}
+
+.bs-header {
+    &__small {
+        font-size: 1.2rem;
+        font-weight: 600;
+        color: var(--gray-text);
+    }
+}
+
+.nbs-header {
+    text-align: center;
+    margin-bottom: 1.2rem;
+
+    h3 {
+        font-size: 2.7rem;
+        color: var(--primary-text);
+    }
+
+    p {
+        padding-top: 1.4rem;
+        font-weight: 500;
+        font-size: 1.5rem;
+        color: var(--gray-text);
+    }
+
+    &--paddingbg {
+        p {
+            padding-top: 2rem !important;
+        }
+    }
+}
+
+.bs-btn {
+    border: 0;
+    border-radius: $border_radius;
+    padding: 1rem 1.9rem;
+    cursor: pointer;
+
+    &--primary {
+        background: var(--primary);
+        color: #fff;
+        font-weight: 500;
+        font-size: 1.3rem;
+    }
+}
+
+.bs-input {
+    border: 0;
+    border-radius: $border_radius;
+    font-weight: 500;
+    font-size: 1.2rem;
+
+    &__border {
+        border: 1px solid var(--border-1);
+        padding: .8rem 1rem;
+    }
+}
+
+.bs-textarea {
+    resize: none;
+    border: 1px solid var(--border-1);
+    border-radius: $border_radius;
+    outline: 0;
+    padding: .8rem 1rem;
+    min-height: 14rem;
+    font-weight: 400;
+    font-size: 1.2rem;
+}
+
+.bs-form {
+    &__error {
+        font-size: 1rem;
+        font-weight: 500;
+        color: var(--negative);
+        padding-top: .5rem;
+    }
+}

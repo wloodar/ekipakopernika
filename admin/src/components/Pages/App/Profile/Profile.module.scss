@@ -1,0 +1,71 @@
+@import '../../../../sass/config.scss';
+
+.card-person {
+    display: flex;
+    align-items: center;
+
+    &__icon {
+        width: 3.7rem; height: 3.7rem;
+    }
+
+    &__name {
+        padding-top: .4rem;
+        width: calc(100% - 14rem);
+
+        p {
+            font-size: 1.4rem;
+            color: var(--gray-text);
+            font-weight: 500;
+            line-height: 80%;
+        }
+         
+        span {
+            font-size: 1.2rem;
+            color: #99a0ab;
+            font-weight: 500;
+        }
+    }
+
+    &__action {
+        width: 9rem;
+        text-align: right;
+
+        button {
+            border: 0;
+            font-weight: 500;
+            font-size: 1.2rem;
+            color: var(--primary);
+            cursor: pointer;
+        }
+    }
+}
+
+.card-preferences {
+
+    &__darkmode {
+        display: flex;
+        align-items: center;
+        margin-top: 1.7rem;
+
+        p {
+            width: calc(100% - 10rem);
+            font-weight: 500;
+            font-size: 1.3rem;
+            color: var(--gray-text);
+            padding-left: .8rem;
+        }
+
+        svg {
+            width: 1.4rem; height: 1.4rem;
+            stroke: var(--gray-text);
+        }
+
+        span {
+            width: 10rem;
+            text-align: right;
+            color: var(--primary);
+            font-weight: 600;
+            font-size: 1.3rem;
+        }
+    }
+}

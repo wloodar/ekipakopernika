@@ -1,0 +1,84 @@
+.g-width {
+    @include globalWidth;
+}
+
+.bs-btn {
+    // width: 100%;
+    // border-radius: $border-radius;
+    font-size: 1.1rem;
+    font-weight: 700;
+    padding: .8rem 2.1rem;
+    cursor: pointer;
+    border-radius: 200px;
+
+    &--primary {
+        background: var(--primary);
+        color: #fff;
+    }
+
+    &--rounded {
+        border-radius: 200px;
+    }
+}
+
+.bs-input {
+    display: inline-block;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 1.4rem 0 .5rem;
+}
+
+.nbs-input {
+    display: inline-block;
+    box-sizing: border-box;
+    padding: 1.4rem 1.7rem;
+    border-radius: $border_radius;
+    @include createShadow(var(--shadow-1));
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+
+.bs-title {
+    // font-size: 2rem;
+    font-size: 1.9rem;
+    font-weight: 600;
+    color: var(--primary-text);
+}
+
+.bs-header {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: #222;
+}
+
+
+
+
+.smt-sticky {
+    margin-top: 70vh;
+    height: 100vh;
+    position: relative;
+    box-sizing: border-box;
+    // background: blue;
+
+    img {
+        display: block;
+        width: 100%;
+        margin-left: auto; margin-right: auto;
+    }
+}
+
+// blockquote {
+//     font-size: 2.3em;
+//     width: 30%;
+//     margin-top: 17%;
+//     position: absolute;
+    
+//     span {
+//       width: 100%;
+//       background: red;
+//       display: block;
+//       height: 5px;
+//       margin-top: 20px;
+//     }
+//   }

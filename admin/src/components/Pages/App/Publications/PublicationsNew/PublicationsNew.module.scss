@@ -1,0 +1,105 @@
+@import '../../../../../sass/config.scss';
+
+.categories-grid {
+    display: grid;
+    grid-column-gap: 1.2rem;
+    grid-row-gap: 1.2rem;
+    grid-template-columns: calc(33.33% - .8rem) calc(33.33% - .8rem) calc(33.3% - .8rem);
+
+    @include respond(tab-port) {
+        grid-template-columns: calc(50% - .4rem) calc(50% - .4rem);
+        grid-column-gap: .8rem;
+        grid-row-gap: .8rem;
+    }
+}
+
+.categories-item {
+    width: 100%;
+    border-radius: $border_radius;
+    overflow: hidden;
+    text-align: center;
+    cursor: pointer;
+    position: relative;
+    height: 14rem;
+    @include createTransition(.4s, cubic-bezier(.38,.41,.26,1));
+
+    &::after {
+        position: absolute;
+        content: "";
+        width: 100%; height: 100%;
+        bottom: 0; left: 0;
+        // background: linear-gradient(180deg,transparent,rgba(0,0,0,.62));
+        background: linear-gradient(180deg,transparent,rgba(0,0,0,1));
+        z-index: 0;
+        opacity: .8;
+    }
+
+    &:hover {
+        img {
+            transform: scale(1.15);
+        }
+
+        transform: scale(1.03);
+    }
+
+    &--active {
+        &::after {
+            background: linear-gradient(180deg,transparent, var(--primary)) !important;
+        }
+
+        p {
+            font-size: 2.1rem !important;
+            transform: translateY(0) !important;
+
+            @include respond(phone) {
+                font-size: 1.7rem !important;
+            }
+        }
+
+        span {
+            transform: translateY(0) !important;
+            opacity: 1 !important;
+        }
+    }
+
+    img {
+        position: absolute;
+        top: 0; left: 0;
+        width: 100%; height: 100%;
+        -o-object-fit: cover;
+        object-fit: cover;
+        font-family: "object-fit: cover";
+        @include createTransition(.4s, cubic-bezier(.38,.41,.26,1));
+    }
+
+    &__name {
+        @include absoluteCenter;
+        padding: 0 1.7rem;
+        z-index: 1;
+    }   
+
+    p {
+        font-size: 1.9rem;
+        font-weight: 700;
+        color: #fff;
+        @include createTransition(.4s, cubic-bezier(.38,.41,.26,1));
+        transform: translateY(1.2rem);
+
+        @include respond(phone) {
+            font-size: 1.5rem;
+        }
+    }
+
+    span {
+        font-size: 1.3rem;
+        font-weight: 700;
+        color: #fff;
+        opacity: 0;
+        @include createTransition(.6s, cubic-bezier(.38,.41,.26,1));
+        transform: translateY(.7rem);
+
+        @include respond(phone) {
+            font-size: 1.1rem;
+        }
+    }
+}
